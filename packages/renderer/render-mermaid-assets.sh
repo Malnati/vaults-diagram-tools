@@ -98,8 +98,8 @@ Options:
                           Also sets the default theme in the beautiful-mermaid engine (when selected).
   --png                     Also write <name>.png, in addition to SVG and JPEG.
   --puppeteer-config FILE   Puppeteer configuration for mmdc, useful on VPS hosts with --no-sandbox.
-  --css-file FILE           CSS global passado ao mmdc via --cssFile.
-  -h, --help                Mostra esta ajuda.
+  --css-file FILE           Global CSS passed to mmdc via --cssFile.
+  -h, --help                Show this help.
 
 Environment variables:
   MMDC_RENDER_ENGINE        vendor | mmdc | beautiful | bm (default: mmdc)

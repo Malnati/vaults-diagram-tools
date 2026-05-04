@@ -71,7 +71,7 @@ Options:
   --flat-output             Write all artifacts directly into --output-dir.
   --manifest FILE           Write a JSON report of inputs, outputs, and errors.
   --vendor-node-root DIR    vendor/node directory. Default: packages/renderer/vendor/node.
-  -h, --help                Mostra esta ajuda.
+  -h, --help                Show this help.
 
 Variables:
   MMDC_VENDOR_NODE_ROOT     Same as --vendor-node-root.

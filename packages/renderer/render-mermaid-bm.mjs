@@ -275,7 +275,7 @@ async function main() {
   try {
     source = fs.readFileSync(inputPath, "utf-8");
   } catch (error) {
-    console.error(`Erro ao ler ${inputPath}: ${error.message}`);
+    console.error(`Error reading ${inputPath}: ${error.message}`);
     process.exit(1);
   }
 
