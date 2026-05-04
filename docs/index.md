@@ -5,10 +5,12 @@
 Portable diagram automation for teams that need reproducible Mermaid assets, source-code diagrams, and MCP workflows without Vault-specific content.
 
 - [GitHub repository](https://github.com/malnati/vaults-diagram-tools)
-- [npm package `vaults-diagram-tools@0.1.3`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3)
+- [npm package `vaults-diagram-tools@0.1.4`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4)
 - [MCP Registry `io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
+- [VS Code Marketplace `malnati.vaults-diagram-tools`](https://marketplace.visualstudio.com/items?itemName=malnati.vaults-diagram-tools)
+- [Direct VSIX download](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix)
 - [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
-- [GitHub release v0.1.1](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.1)
+- [GitHub release v0.1.4](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.4)
 - [Quay.io Podman image `quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`](https://quay.io/repository/ricardomalnati/vaults-diagram-tools)
 - [GitHub App](https://github.com/apps/vaults-diagram-tools)
 - [Brand assets](assets/brand/brand-manifest.json)
@@ -59,13 +61,13 @@ npx --yes --package vaults-diagram-tools vaults-diagram-mcp
 
 - **Markdown docs:** keep the Mermaid source as a linked `.mmd`, render `.svg` and `.jpg`, and show source inline with a fenced `mermaid` block.
 - **Source graph reviews:** generate diagrams from real source paths and inspect manifest selection data for requested files, omitted connectors, and rendered outputs.
-- **Agent automation:** use the MCP server when clients need diagram rendering through a narrow, explicit tool surface. Current MCP Registry status is `active` at version `0.1.3`.
+- **Agent automation:** use the MCP server when clients need diagram rendering through a narrow, explicit tool surface. Current MCP Registry status is `active` at version `0.1.4`.
 
 ## Download and distribution
 
 ### npm registry
 
-Current npm latest is [`vaults-diagram-tools@0.1.3`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3).
+Current npm latest is [`vaults-diagram-tools@0.1.4`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4).
 
 ```bash
 npm install -D vaults-diagram-tools
@@ -83,12 +85,19 @@ npm test
 
 ### GitHub release assets
 
-The latest GitHub Release and GHCR image remain `v0.1.1`; the Quay.io Podman image is published at `v0.1.0`; npm and MCP Registry metadata are at `0.1.3`.
+The latest GitHub Release, GHCR image, npm package, MCP Registry metadata, and VS Code VSIX are published at `v0.1.4`; the Quay.io Podman image remains at `v0.1.0`.
 
-- [vaults-diagram-tools-0.1.1.tgz](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz)
-- [vaults-diagram-tools-0.1.1.zip](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip)
-- `ghcr.io/malnati/vaults-diagram-tools:v0.1.1`
+- [vaults-diagram-tools-0.1.4.tgz](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-0.1.4.tgz)
+- [vaults-diagram-tools-0.1.4.zip](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-0.1.4.zip)
+- [vaults-diagram-tools-vscode-0.1.4.vsix](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix)
+- `ghcr.io/malnati/vaults-diagram-tools:v0.1.4`
 - `quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`
+
+Install the VSIX without Marketplace:
+
+```bash
+code --install-extension vaults-diagram-tools-vscode-0.1.4.vsix
+```
 
 ### Container
 
@@ -98,7 +107,7 @@ Run from GHCR with Docker:
 docker run --rm \
   -v "$PWD/examples/simple:/work/input:ro" \
   -v "$PWD/tmp/container-output:/work/output:rw" \
-  ghcr.io/malnati/vaults-diagram-tools:v0.1.1 \
+  ghcr.io/malnati/vaults-diagram-tools:v0.1.4 \
   --output-dir /work/output /work/input/flowchart.mmd
 ```
 
@@ -114,9 +123,17 @@ podman run --rm \
 
 Quay.io also exposes `0.1.0` and `latest` tags for the same published package line.
 
+### VS Code extension
+
+Install through the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=malnati.vaults-diagram-tools), [Open VSX](https://open-vsx.org/extension/malnati/vaults-diagram-tools), or the direct [GitHub Release VSIX](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix).
+
+```bash
+code --install-extension vaults-diagram-tools-vscode-0.1.4.vsix
+```
+
 ### MCP registries
 
-- [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools): `io.github.Malnati/vaults-diagram-tools`, status `active`, version `0.1.3`.
+- [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools): `io.github.Malnati/vaults-diagram-tools`, status `active`, version `0.1.4`.
 - [Smithery](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools): `ricardomalnati/vaults-diagram-tools` is published.
 - [PR #17](https://github.com/Malnati/vaults-diagram-tools/pull/17) aligned the MCP Registry publisher name.
 
@@ -209,7 +226,7 @@ flowchart LR
 - Dracula-themed examples credit the MIT-licensed Dracula Theme palette through `beautiful-mermaid`.
 - Icon credits include Font Awesome 4, SVG Logos by Gil Barbara, and Lucide Icons via Iconify JSON packages.
 - Artifact policy: keep Mermaid source as `.mmd`, render `.svg` and `.jpg`, link all three artifacts from Markdown, and use fenced `mermaid` blocks for inline source.
-- Distribution proof points: npm `0.1.3`, MCP Registry `active` at version `0.1.3`, Smithery published, GitHub Release/GHCR `v0.1.1`, Quay.io Podman image `v0.1.0`.
+- Distribution proof points: npm `0.1.4`, MCP Registry `active` at version `0.1.4`, Smithery published, VS Code VSIX/Marketplace targets, GitHub Release/GHCR `v0.1.4`, Quay.io Podman image `v0.1.0`.
 
 ## Brand assets
 

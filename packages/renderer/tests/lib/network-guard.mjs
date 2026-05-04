@@ -36,9 +36,20 @@ function commandLineHasForbidden(command) {
 }
 
 function assertAllowedCommand(command) {
+  if (isAllowedPythonChecker(command, [])) return;
   const name = commandName(command);
   const forbidden = blockedCommands.has(name) ? name : commandLineHasForbidden(command);
   if (forbidden) throw offlineError("child_process", String(command));
+}
+
+function isAllowedPythonChecker(command, args) {
+  const checker = process.env.MERMAID_OFFLINE_ALLOWED_PYTHON_CHECKER;
+  if (!checker) return false;
+  if (commandName(command) !== "python3") return false;
+
+  const firstArg = Array.isArray(args?.[0]) ? args[0][0] : args?.[0];
+  if (!firstArg) return false;
+  return path.resolve(String(firstArg)) === path.resolve(checker);
 }
 
 function patchMethod(object, name, replacement) {
@@ -98,6 +109,9 @@ function patchChildProcess() {
   for (const name of ["spawn", "spawnSync", "execFile", "execFileSync", "fork"]) {
     const original = childProcess[name];
     patchMethod(childProcess, name, function guardedCommand(command, ...args) {
+      if (isAllowedPythonChecker(command, args)) {
+        return original.call(this, command, ...args);
+      }
       assertAllowedCommand(command);
       return original.call(this, command, ...args);
     });

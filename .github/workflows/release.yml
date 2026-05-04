@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,20 +63,17 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Upload GitHub release assets
-        uses: softprops/action-gh-release@v2
-        with:
-          body: |
-            ![vaults-diagram-tools release banner](https://raw.githubusercontent.com/Malnati/vaults-diagram-tools/main/docs/assets/brand/release-banner.png)
-
-            Mermaid to assets. Source code to maps. MCP for agents.
-
-            Release artifacts preserve npm package output, zip handoff, GHCR image metadata, notices, and the deterministic brand kit.
-          files: |
-            dist/*.tgz
-            dist/*.zip
+      - name: Check npm package publication status
+        id: npm_package
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if npm view "vaults-diagram-tools@${version}" version; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Publish npm package
-        if: env.NPM_TOKEN != ''
+        if: env.NPM_TOKEN != '' && steps.npm_package.outputs.exists != 'true'
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -98,6 +97,35 @@ jobs:
             sleep 10
           done
           npm view "vaults-diagram-tools@${version}" version
+      - name: Install VS Code extension dependencies
+        run: npm run vscode:install
+      - name: Test VS Code extension
+        run: npm run vscode:test
+      - name: Package VS Code extension
+        run: npm run vscode:package
+      - name: Publish VS Code Marketplace extension
+        if: env.VSCE_PAT != ''
+        run: npm run vscode:publish:marketplace -- -p "$VSCE_PAT"
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      - name: Publish Open VSX extension
+        if: env.OVSX_PAT != ''
+        run: npm run vscode:publish:openvsx -- -p "$OVSX_PAT"
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      - name: Upload GitHub release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          body: |
+            ![vaults-diagram-tools release banner](https://raw.githubusercontent.com/Malnati/vaults-diagram-tools/main/docs/assets/brand/release-banner.png)
+
+            Mermaid to assets. Source code to maps. MCP for agents.
+
+            Release artifacts preserve npm package output, zip handoff, GHCR image metadata, VS Code extension VSIX, notices, and the deterministic brand kit.
+          files: |
+            dist/*.tgz
+            dist/*.zip
+            dist/*.vsix
       - name: Install MCP publisher
         run: |
           curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher

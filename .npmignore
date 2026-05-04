@@ -1,6 +1,7 @@
 .git/
 .github/
 node_modules/
+packaging/vscode/node_modules/
 dist/
 tmp/
 packages/renderer/tests/output/
