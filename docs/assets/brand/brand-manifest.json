@@ -1,0 +1,127 @@
+{
+  "name": "vaults-diagram-tools",
+  "tagline": "Mermaid to assets. Source code to maps. MCP for agents.",
+  "brandSource": "docs/index.html landing layout",
+  "palette": {
+    "bg": "#0b1020",
+    "bg2": "#10172a",
+    "cyan": "#67e8f9",
+    "purple": "#a78bfa",
+    "text": "#f8fafc",
+    "muted": "#cbd5e1",
+    "line": "#334155",
+    "green": "#86efac",
+    "yellow": "#fde68a",
+    "red": "#fb7185"
+  },
+  "assets": [
+    {
+      "file": "logo.svg",
+      "type": "svg",
+      "width": 1200,
+      "height": 260,
+      "bytes": 2215,
+      "sha256": "fab7a1edd12f4c7bff95798a13ee4f522ccfbc821c3e95e15d0af6401804c292",
+      "destination": "README, landing, package surfaces"
+    },
+    {
+      "file": "logo.png",
+      "type": "png",
+      "width": 1200,
+      "height": 260,
+      "bytes": 57517,
+      "sha256": "3731f06863f9aea2403c6f82ad84439ef324189a9d00bb16b553477a5edc7011",
+      "destination": "README, landing, package surfaces"
+    },
+    {
+      "file": "icon.svg",
+      "type": "svg",
+      "width": 512,
+      "height": 512,
+      "bytes": 1765,
+      "sha256": "f7bc4125fc1cd58445f1e04e6bbc552d4154f615a3e3dcba6f873dd5f6aa8788",
+      "destination": "Package icon source"
+    },
+    {
+      "file": "icon-200.png",
+      "type": "png",
+      "width": 200,
+      "height": 200,
+      "bytes": 29828,
+      "sha256": "87d49f9fe2db99f883d67422964b46a8ce194c338864d9012f036098826a29f3",
+      "destination": "Small package icon"
+    },
+    {
+      "file": "icon-512.png",
+      "type": "png",
+      "width": 512,
+      "height": 512,
+      "bytes": 108043,
+      "sha256": "6025be05e0b2a0ac0481f18911ae23567d71e160c806e03ba3ea7e1dc0ba4361",
+      "destination": "Large package icon"
+    },
+    {
+      "file": "favicon.svg",
+      "type": "svg",
+      "width": 64,
+      "height": 64,
+      "bytes": 1722,
+      "sha256": "dc83204c410d93fb89a5a438c5d42f51c4fa47e9fa8316ac9944a7b6dd92d493",
+      "destination": "GitHub Pages favicon"
+    },
+    {
+      "file": "repository-banner.png",
+      "type": "png",
+      "width": 1600,
+      "height": 520,
+      "bytes": 240131,
+      "sha256": "f3e1270a66d7745b51a0f8eee6765f14b124388e716cd63cc341e3d1e9c0f9f3",
+      "destination": "README and repository landing"
+    },
+    {
+      "file": "social-preview.png",
+      "type": "png",
+      "width": 1280,
+      "height": 640,
+      "bytes": 248981,
+      "sha256": "194a47008beade9bd2f2dd381d2f6603d7a6053069a74403ff6609196b16da35",
+      "destination": "GitHub repository social preview"
+    },
+    {
+      "file": "social-preview.jpg",
+      "type": "jpg",
+      "width": 1280,
+      "height": 640,
+      "bytes": 148776,
+      "sha256": "4df10c3a0a41c868359a4cde31d27b92107721268686343d3fbba03a9572f3f2",
+      "destination": "Open Graph fallback"
+    },
+    {
+      "file": "github-app-badge.png",
+      "type": "png",
+      "width": 200,
+      "height": 200,
+      "bytes": 30693,
+      "sha256": "e48d94c876230b69117f5386010340260d83d5917590d0720a1f1017ed51648c",
+      "destination": "GitHub App badge"
+    },
+    {
+      "file": "actions-banner.png",
+      "type": "png",
+      "width": 1200,
+      "height": 300,
+      "bytes": 123047,
+      "sha256": "ccac7be17fa8916c3d80f4a1c416a5954e43230a59ada87970ea8422378f8f99",
+      "destination": "GitHub Actions step summaries"
+    },
+    {
+      "file": "release-banner.png",
+      "type": "png",
+      "width": 1600,
+      "height": 480,
+      "bytes": 222127,
+      "sha256": "bb0345752170d1e7c4e86cbf610861893f89ab0fcf6614634dd52f5a2016d149",
+      "destination": "GitHub Release notes"
+    }
+  ]
+}

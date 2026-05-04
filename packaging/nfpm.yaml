@@ -5,7 +5,7 @@ version: ${VERSION}
 section: utils
 priority: optional
 maintainer: Malnati
-description: Mermaid renderer and source-code diagram generation CLIs.
+description: Mermaid to assets, source code to maps, MCP for agents.
 license: MIT
 homepage: https://github.com/malnati/vaults-diagram-tools
 contents:

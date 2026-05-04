@@ -1,5 +1,7 @@
 # vaults-diagram-tools
 
+![vaults-diagram-tools repository banner](assets/brand/repository-banner.png)
+
 Portable diagram automation for teams that need reproducible Mermaid assets, source-code diagrams, and MCP workflows without Vault-specific content.
 
 - [GitHub repository](https://github.com/malnati/vaults-diagram-tools)
@@ -7,7 +9,9 @@ Portable diagram automation for teams that need reproducible Mermaid assets, sou
 - [MCP Registry `io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
 - [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.1](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.1)
+- [Quay.io Podman image `quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`](https://quay.io/repository/ricardomalnati/vaults-diagram-tools)
 - [GitHub App](https://github.com/apps/vaults-diagram-tools)
+- [Brand assets](assets/brand/brand-manifest.json)
 
 ## Quick start
 
@@ -79,13 +83,16 @@ npm test
 
 ### GitHub release assets
 
-The latest GitHub Release and GHCR image remain `v0.1.1`; npm and MCP Registry metadata are at `0.1.3`.
+The latest GitHub Release and GHCR image remain `v0.1.1`; the Quay.io Podman image is published at `v0.1.0`; npm and MCP Registry metadata are at `0.1.3`.
 
 - [vaults-diagram-tools-0.1.1.tgz](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz)
 - [vaults-diagram-tools-0.1.1.zip](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip)
 - `ghcr.io/malnati/vaults-diagram-tools:v0.1.1`
+- `quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`
 
 ### Container
+
+Run from GHCR with Docker:
 
 ```bash
 docker run --rm \
@@ -94,6 +101,18 @@ docker run --rm \
   ghcr.io/malnati/vaults-diagram-tools:v0.1.1 \
   --output-dir /work/output /work/input/flowchart.mmd
 ```
+
+Run the published Podman image from Quay.io:
+
+```bash
+podman run --rm \
+  -v "$PWD/examples/simple:/work/input:ro" \
+  -v "$PWD/tmp/container-output:/work/output:rw" \
+  quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0 \
+  --output-dir /work/output /work/input/flowchart.mmd
+```
+
+Quay.io also exposes `0.1.0` and `latest` tags for the same published package line.
 
 ### MCP registries
 
@@ -123,7 +142,7 @@ flowchart LR
   Install --> Npx["npx one-shot"]
   Install --> GitHub["GitHub npm"]
   Install --> Local["Local checkout"]
-  Install --> Container["Docker Podman GHCR"]
+  Install --> Container["Docker Podman GHCR Quay.io"]
 
   Npm --> Cli["Public CLIs"]
   Npx --> Cli
@@ -190,10 +209,28 @@ flowchart LR
 - Dracula-themed examples credit the MIT-licensed Dracula Theme palette through `beautiful-mermaid`.
 - Icon credits include Font Awesome 4, SVG Logos by Gil Barbara, and Lucide Icons via Iconify JSON packages.
 - Artifact policy: keep Mermaid source as `.mmd`, render `.svg` and `.jpg`, link all three artifacts from Markdown, and use fenced `mermaid` blocks for inline source.
-- Distribution proof points: npm `0.1.3`, MCP Registry `active` at version `0.1.3`, Smithery published, GitHub Release/GHCR `v0.1.1`.
+- Distribution proof points: npm `0.1.3`, MCP Registry `active` at version `0.1.3`, Smithery published, GitHub Release/GHCR `v0.1.1`, Quay.io Podman image `v0.1.0`.
+
+## Brand assets
+
+The brand kit is generated from the current landing layout and reused by repository, GitHub Pages, Actions summaries, release notes, GitHub App badge, and social preview surfaces.
+
+- [Brand manifest](assets/brand/brand-manifest.json)
+- [Logo SVG](assets/brand/logo.svg) / [Logo PNG](assets/brand/logo.png)
+- [Repository banner](assets/brand/repository-banner.png)
+- [Social preview PNG](assets/brand/social-preview.png) / [Social preview JPEG](assets/brand/social-preview.jpg)
+- [GitHub App badge](assets/brand/github-app-badge.png)
+- [Actions banner](assets/brand/actions-banner.png)
+- [Release banner](assets/brand/release-banner.png)
+
+```bash
+npm run brand:generate
+npm run brand:check
+```
 
 ## More links
 
 - [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 - [Vaults compatibility notes](vaults-compatibility.md)
 - [GitHub Container Registry package](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools)
+- [Quay.io Podman image](https://quay.io/repository/ricardomalnati/vaults-diagram-tools)

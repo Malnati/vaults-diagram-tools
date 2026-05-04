@@ -1,5 +1,5 @@
 class VaultsDiagramTools < Formula
-  desc "Mermaid and source-code diagram generation tools"
+  desc "Mermaid to assets, source code to maps, MCP for agents"
   homepage "https://github.com/malnati/vaults-diagram-tools"
   url "https://github.com/malnati/vaults-diagram-tools/releases/download/vVERSION/vaults-diagram-tools-VERSION.zip"
   sha256 "SHA256"
