@@ -15,10 +15,6 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-latest
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      VSCE_PAT: ${{ secrets.VSCE_PAT }}
-      OVSX_PAT: ${{ secrets.OVSX_PAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -72,11 +68,6 @@ jobs:
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Publish npm package
-        if: env.NPM_TOKEN != '' && steps.npm_package.outputs.exists != 'true'
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Write branded summary
         if: always()
         run: |
@@ -85,34 +76,31 @@ jobs:
             echo
             echo '### vaults-diagram-tools Release'
             echo 'Release notes use docs/assets/brand/release-banner.png.'
+            echo
+            echo "npm registry visible before asset upload: ${{ steps.npm_package.outputs.exists }}"
           } >> "$GITHUB_STEP_SUMMARY"
-      - name: Wait for npm package availability
-        run: |
-          version="$(node -p "require('./package.json').version")"
-          for attempt in $(seq 1 12); do
-            if npm view "vaults-diagram-tools@${version}" version; then
-              exit 0
-            fi
-            echo "npm package vaults-diagram-tools@${version} not visible yet; retry ${attempt}/12"
-            sleep 10
-          done
-          npm view "vaults-diagram-tools@${version}" version
       - name: Install VS Code extension dependencies
         run: npm run vscode:install
       - name: Test VS Code extension
         run: npm run vscode:test
       - name: Package VS Code extension
         run: npm run vscode:package
-      - name: Publish VS Code Marketplace extension
-        if: env.VSCE_PAT != ''
-        run: npm run vscode:publish:marketplace -- -p "$VSCE_PAT"
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
-      - name: Publish Open VSX extension
-        if: env.OVSX_PAT != ''
-        run: npm run vscode:publish:openvsx -- -p "$OVSX_PAT"
-        env:
-          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      - name: Write external registry summary
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          {
+            echo
+            echo '### External registry publication'
+            echo
+            echo 'GitHub Actions intentionally does not read `NPM_TOKEN`, `VSCE_PAT`, or `OVSX_PAT`.'
+            if [[ "${{ steps.npm_package.outputs.exists }}" == "true" ]]; then
+              echo "- npm: vaults-diagram-tools@${version} is visible on npm."
+            else
+              echo "- npm: publish manually from an authenticated local shell when ready."
+            fi
+            echo "- VS Code Marketplace: publish manually from an authenticated local shell."
+            echo "- Open VSX: publish manually from an authenticated local shell."
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload GitHub release assets
         uses: softprops/action-gh-release@v2
         with:
@@ -121,7 +109,7 @@ jobs:
 
             Mermaid to assets. Source code to maps. MCP for agents.
 
-            Release artifacts preserve npm package output, zip handoff, GHCR image metadata, VS Code extension VSIX, notices, and the deterministic brand kit.
+            Release artifacts preserve the npm tarball handoff, zip handoff, GHCR image metadata, VS Code extension VSIX, notices, and the deterministic brand kit.
           files: |
             dist/*.tgz
             dist/*.zip

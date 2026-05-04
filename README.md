@@ -216,7 +216,7 @@ The desktop VS Code extension is published as `malnati.vaults-diagram-tools` and
 
 - Command Palette actions for Mermaid SVG/JPEG rendering, source-diagram generation, and Markdown diagram-policy validation.
 - A native VS Code MCP server definition provider for the bundled `vaults-diagram-tools` stdio server.
-- Marketplace/Open VSX publish scripts used by the release workflow when `VSCE_PAT` and `OVSX_PAT` are configured.
+- Marketplace/Open VSX publish scripts for manual publication from an authenticated local shell. The GitHub Actions release workflow does not depend on `NPM_TOKEN`, `VSCE_PAT`, or `OVSX_PAT`.
 
 Install options after `v0.1.4` is released:
 
@@ -455,9 +455,9 @@ Templates in v1:
 | Registry PR | [PR #17](https://github.com/Malnati/vaults-diagram-tools/pull/17) aligned the MCP Registry publisher name and was merged. |
 | GHCR container | [`ghcr.io/malnati/vaults-diagram-tools:v0.1.4`](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools) |
 | Quay.io Podman image | [`quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`](https://quay.io/repository/ricardomalnati/vaults-diagram-tools) |
-| Automation | [CI](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/ci.yml), [CodeQL](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/codeql.yml), [Pages](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/pages.yml), and [Release](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/release.yml) workflows are published through GitHub Actions. |
+| Automation | [CI](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/ci.yml), [CodeQL](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/codeql.yml), [Pages](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/pages.yml), and [Release](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/release.yml) workflows run through GitHub Actions; release builds and uploads GitHub artifacts without `NPM_TOKEN`, `VSCE_PAT`, or `OVSX_PAT`. |
 | GitHub App | [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools) public read-only app; [install](https://github.com/apps/vaults-diagram-tools/installations/new). |
-| VS Code extension | Workflow target [`malnati.vaults-diagram-tools`](https://marketplace.visualstudio.com/items?itemName=malnati.vaults-diagram-tools) for Marketplace and [`malnati/vaults-diagram-tools`](https://open-vsx.org/extension/malnati/vaults-diagram-tools) for Open VSX; publication requires `VSCE_PAT` and `OVSX_PAT`. |
+| VS Code extension | VSIX is attached to the GitHub Release. Marketplace target [`malnati.vaults-diagram-tools`](https://marketplace.visualstudio.com/items?itemName=malnati.vaults-diagram-tools) and Open VSX target [`malnati/vaults-diagram-tools`](https://open-vsx.org/extension/malnati/vaults-diagram-tools) are published manually outside GitHub Actions. |
 | Documentation | [GitHub Pages](https://malnati.github.io/vaults-diagram-tools/) publishes the `docs/` site. |
 
 ## Documentation
