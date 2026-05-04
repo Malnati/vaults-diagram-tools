@@ -9,6 +9,10 @@
 
 Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline assets, and MCP workflows.
 
+- [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
+- [GitHub release v0.1.0](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.0)
+- [npm package](https://www.npmjs.com/package/vaults-diagram-tools)
+
 ## What is included
 
 - Mermaid renderer extracted from the Vaults toolchain.
@@ -35,6 +39,14 @@ npx vaults-diagram-mcp
 ```bash
 npm install github:malnati/vaults-diagram-tools
 ```
+
+### GitHub release assets
+
+Release `v0.1.0` publishes the npm tarball, zip artifact, and container image:
+
+- [vaults-diagram-tools-0.1.0.tgz](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.tgz)
+- [vaults-diagram-tools-0.1.0.zip](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.zip)
+- `ghcr.io/malnati/vaults-diagram-tools`
 
 ### Local checkout
 
@@ -128,6 +140,7 @@ Working in v1:
 - MCP server
 - zip release
 - GitHub Actions CI, release, CodeQL, and Pages workflows
+- Homebrewery package page with searchable tags
 
 Templates in v1:
 
@@ -151,7 +164,9 @@ Templates in v1:
 
 ## Documentation
 
+- [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 - [GitHub Pages documentation](https://malnati.github.io/vaults-diagram-tools/)
+- [GitHub release v0.1.0](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.0)
 - [Vaults compatibility notes](docs/vaults-compatibility.md)
 - [Contributing guide](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
