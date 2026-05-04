@@ -1,0 +1,27 @@
+name: vaults-diagram-tools
+arch: all
+platform: linux
+version: ${VERSION}
+section: utils
+priority: optional
+maintainer: Malnati
+description: Mermaid renderer and source-code diagram generation CLIs.
+license: MIT
+homepage: https://github.com/malnati/vaults-diagram-tools
+contents:
+  - src: ./
+    dst: /usr/lib/vaults-diagram-tools
+    type: tree
+    file_info:
+      mode: 0755
+  - src: /usr/lib/vaults-diagram-tools/packages/renderer/render-mermaid-assets.mjs
+    dst: /usr/bin/vaults-mermaid-render
+    type: symlink
+  - src: /usr/lib/vaults-diagram-tools/packages/source-diagrams/source-diagrams.mjs
+    dst: /usr/bin/vaults-source-diagrams
+    type: symlink
+  - src: /usr/lib/vaults-diagram-tools/packages/mcp/server.mjs
+    dst: /usr/bin/vaults-diagram-mcp
+    type: symlink
+scripts:
+  postinstall: packaging/debian/postinstall.sh

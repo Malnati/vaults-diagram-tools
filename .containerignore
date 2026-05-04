@@ -1,0 +1,8 @@
+.git
+node_modules
+dist
+tmp
+*.tgz
+*.zip
+packages/renderer/tests/output
+packages/renderer/vendor/node/node_modules

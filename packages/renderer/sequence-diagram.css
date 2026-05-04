@@ -1,0 +1,197 @@
+/*
+ * Global style for Mermaid sequenceDiagram rendered by packages/renderer/render-mermaid-assets.sh.
+ * Escopo intencional: somente SVGs de sequence diagram.
+ */
+
+svg[aria-roledescription="sequence"] {
+  --seq-blue-900: #0f2f4f;
+  --seq-blue-700: #1f4e79;
+  --seq-blue-500: #2f73a8;
+  --seq-blue-100: #e8f1ff;
+  --seq-blue-050: #f6f9ff;
+  --seq-slate-900: #0f172a;
+  --seq-slate-700: #334155;
+  --seq-slate-500: #64748b;
+  --seq-slate-300: #cbd5e1;
+  --seq-slate-200: #e2e8f0;
+  --seq-amber-100: #fff3d6;
+  --seq-amber-500: #c98a00;
+  --seq-teal-100: #e4fbf6;
+  --seq-teal-600: #16856f;
+  --seq-violet-100: #f0eaff;
+  --seq-violet-600: #6d4bb2;
+  --seq-note-bg: #fff7cf;
+  --seq-note-border: #d7a929;
+  --seq-shadow: drop-shadow(0 2px 5px rgba(15, 23, 42, 0.16));
+}
+
+/* Participants / actors */
+svg[aria-roledescription="sequence"] .actor,
+svg[aria-roledescription="sequence"] g[data-et="participant"] .actor,
+svg[aria-roledescription="sequence"] g[data-et="participant"] path,
+svg[aria-roledescription="sequence"] g[data-et="participant"] circle,
+svg[aria-roledescription="sequence"] g[data-et="participant"] line {
+  stroke: var(--seq-blue-700) !important;
+  stroke-width: 1.7px !important;
+}
+
+svg[aria-roledescription="sequence"] rect.actor,
+svg[aria-roledescription="sequence"] g[data-et="participant"] rect.actor {
+  fill: var(--seq-blue-100) !important;
+  rx: 8px;
+  ry: 8px;
+  filter: var(--seq-shadow);
+}
+
+svg[aria-roledescription="sequence"] text.actor,
+svg[aria-roledescription="sequence"] text.actor tspan,
+svg[aria-roledescription="sequence"] .actor-box,
+svg[aria-roledescription="sequence"] .actor-man {
+  fill: var(--seq-slate-900) !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.01em;
+}
+
+svg[aria-roledescription="sequence"] .actor-line {
+  stroke: var(--seq-slate-300) !important;
+  stroke-width: 1.1px !important;
+  stroke-dasharray: 5 7 !important;
+}
+
+/* Typed participants: boundary/control/entity/database/queue */
+svg[aria-roledescription="sequence"] g[data-type="boundary"] path,
+svg[aria-roledescription="sequence"] g[data-type="boundary"] circle,
+svg[aria-roledescription="sequence"] g[data-type="boundary"] line {
+  stroke: var(--seq-blue-900) !important;
+  stroke-width: 2.4px !important;
+}
+
+svg[aria-roledescription="sequence"] g[data-type="boundary"] text,
+svg[aria-roledescription="sequence"] g[data-type="boundary"] tspan {
+  fill: var(--seq-blue-900) !important;
+  font-weight: 750 !important;
+}
+
+svg[aria-roledescription="sequence"] g[data-type="control"] circle,
+svg[aria-roledescription="sequence"] g[data-type="control"] path {
+  fill: var(--seq-violet-100) !important;
+  stroke: var(--seq-violet-600) !important;
+  stroke-width: 2px !important;
+}
+
+svg[aria-roledescription="sequence"] g[data-type="control"] line {
+  stroke: var(--seq-violet-600) !important;
+  stroke-width: 2px !important;
+}
+
+svg[aria-roledescription="sequence"] g[data-type="entity"] circle,
+svg[aria-roledescription="sequence"] g[data-type="entity"] line {
+  fill: var(--seq-teal-100) !important;
+  stroke: var(--seq-teal-600) !important;
+  stroke-width: 2px !important;
+}
+
+svg[aria-roledescription="sequence"] g[data-type="entity"] text,
+svg[aria-roledescription="sequence"] g[data-type="entity"] tspan {
+  fill: #075e50 !important;
+}
+
+svg[aria-roledescription="sequence"] g[data-type="database"] path {
+  fill: #eef6ff !important;
+  stroke: var(--seq-blue-700) !important;
+  stroke-width: 2px !important;
+  filter: var(--seq-shadow);
+}
+
+svg[aria-roledescription="sequence"] g[data-type="queue"] path {
+  fill: var(--seq-amber-100) !important;
+  stroke: var(--seq-amber-500) !important;
+  stroke-width: 2px !important;
+  filter: var(--seq-shadow);
+}
+
+svg[aria-roledescription="sequence"] g[data-type="queue"] text,
+svg[aria-roledescription="sequence"] g[data-type="queue"] tspan {
+  fill: #7a4f00 !important;
+}
+
+/* Messages and lifeline flow */
+svg[aria-roledescription="sequence"] .messageLine0 {
+  stroke: var(--seq-slate-700) !important;
+  stroke-width: 1.8px !important;
+}
+
+svg[aria-roledescription="sequence"] .messageLine1 {
+  stroke: var(--seq-slate-500) !important;
+  stroke-width: 1.6px !important;
+  stroke-dasharray: 4 5 !important;
+}
+
+svg[aria-roledescription="sequence"] .messageText,
+svg[aria-roledescription="sequence"] .messageText tspan {
+  fill: var(--seq-slate-900) !important;
+  font-weight: 520 !important;
+}
+
+svg[aria-roledescription="sequence"] [id$="-arrowhead"] path,
+svg[aria-roledescription="sequence"] [id$="-crosshead"] path {
+  fill: var(--seq-slate-700) !important;
+  stroke: var(--seq-slate-700) !important;
+}
+
+/* Notes */
+svg[aria-roledescription="sequence"] .note {
+  fill: var(--seq-note-bg) !important;
+  stroke: var(--seq-note-border) !important;
+  stroke-width: 1.6px !important;
+  rx: 8px;
+  ry: 8px;
+  filter: var(--seq-shadow);
+}
+
+svg[aria-roledescription="sequence"] .noteText,
+svg[aria-roledescription="sequence"] .noteText tspan {
+  fill: #3b2f00 !important;
+  font-weight: 560 !important;
+}
+
+/* Group blocks / loops / labels */
+svg[aria-roledescription="sequence"] .labelBox {
+  fill: var(--seq-blue-050) !important;
+  stroke: var(--seq-blue-500) !important;
+  stroke-width: 1.4px !important;
+  rx: 6px;
+  ry: 6px;
+}
+
+svg[aria-roledescription="sequence"] .labelText,
+svg[aria-roledescription="sequence"] .labelText tspan,
+svg[aria-roledescription="sequence"] .loopText,
+svg[aria-roledescription="sequence"] .loopText tspan {
+  fill: var(--seq-blue-900) !important;
+  font-weight: 650 !important;
+}
+
+svg[aria-roledescription="sequence"] .loopLine {
+  stroke: var(--seq-blue-500) !important;
+  stroke-width: 1.8px !important;
+  stroke-dasharray: 5 5 !important;
+}
+
+/* Activations and sequence numbers */
+svg[aria-roledescription="sequence"] .activation0,
+svg[aria-roledescription="sequence"] .activation1,
+svg[aria-roledescription="sequence"] .activation2 {
+  fill: #dcebff !important;
+  stroke: var(--seq-blue-700) !important;
+  stroke-width: 1.4px !important;
+}
+
+svg[aria-roledescription="sequence"] [id$="-sequencenumber"] {
+  fill: var(--seq-blue-700) !important;
+}
+
+svg[aria-roledescription="sequence"] .sequenceNumber {
+  fill: #ffffff !important;
+  font-weight: 700 !important;
+}

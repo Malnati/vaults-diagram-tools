@@ -1,0 +1,30 @@
+{
+  "name": "vaults-diagram-tools-vscode",
+  "displayName": "Vaults Diagram Tools",
+  "description": "VS Code shell integration for vaults-diagram-tools CLIs.",
+  "version": "0.1.0",
+  "publisher": "malnati",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vaultsDiagramTools.renderCurrentMermaid",
+        "title": "Vaults Diagram Tools: Render Current Mermaid File"
+      }
+    ],
+    "configuration": {
+      "title": "Vaults Diagram Tools",
+      "properties": {
+        "vaultsDiagramTools.cliPath": {
+          "type": "string",
+          "default": "vaults-mermaid-render",
+          "description": "Path to vaults-mermaid-render CLI."
+        }
+      }
+    }
+  }
+}

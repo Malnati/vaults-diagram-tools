@@ -1,0 +1,9 @@
+.git/
+.github/
+node_modules/
+dist/
+tmp/
+packages/renderer/tests/output/
+packages/renderer/vendor/node/node_modules/
+__pycache__/
+*.pyc

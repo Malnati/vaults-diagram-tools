@@ -1,0 +1,7 @@
+stateDiagram-v2
+    [*] --> Pendente : recebido
+    Pendente --> InProgress : iniciar
+    InProgress --> Concluido : finalizar
+    InProgress --> Blocked : error
+    Blocked --> InProgress : retomar
+    Concluido --> [*]

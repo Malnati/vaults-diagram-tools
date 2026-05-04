@@ -1,0 +1,98 @@
+{
+  "name": "vaults-diagram-tools",
+  "version": "0.1.0",
+  "description": "Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline assets, and MCP workflows.",
+  "type": "module",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">=20.11"
+  },
+  "bin": {
+    "vaults-mermaid-render": "packages/renderer/render-mermaid-assets.mjs",
+    "vaults-source-diagrams": "packages/source-diagrams/source-diagrams.mjs",
+    "vaults-diagram-mcp": "packages/mcp/server.mjs",
+    "vaults-markdown-diagram-policy": "packages/renderer/check-markdown-diagram-policy.py",
+    "vaults-mermaid-ascii": "packages/renderer/render-mermaid-ascii.mjs",
+    "vaults-mermaid-bm": "packages/renderer/render-mermaid-bm.mjs",
+    "vaults-mermaid-podman-build": "packages/renderer/podman/build-image.sh",
+    "vaults-mermaid-podman-render": "packages/renderer/podman/render-in-pod.sh",
+    "vaults-mermaid-podman-test": "packages/renderer/podman/test-podman-vendor.sh"
+  },
+  "exports": {
+    "./renderer": "./packages/renderer/render-mermaid-assets.mjs",
+    "./source-diagrams": "./packages/source-diagrams/source-diagrams.mjs",
+    "./mcp-tools": "./packages/mcp/tools.mjs",
+    "./cdn": "./packaging/cdn/vaults-diagram-tools.mjs"
+  },
+  "files": [
+    "bin/",
+    "packages/",
+    "containers/",
+    "packaging/",
+    "examples/",
+    "docs/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "check": "node --check packages/renderer/render-mermaid-assets.mjs && node --check packages/source-diagrams/source-diagrams.mjs && node --check packages/mcp/server.mjs && node --check packages/mcp/tools.mjs",
+    "test": "npm run check && npm run test:renderer && npm run test:source && npm run test:mcp",
+    "test:renderer": "node --test packages/renderer/tests/*.test.mjs",
+    "test:source": "node --test packages/source-diagrams/tests/*.test.mjs",
+    "test:mcp": "node --test packages/mcp/tests/*.test.mjs",
+    "test:vendor:offline": "bash ./packages/renderer/tests/test-vendor-offline.sh",
+    "audit:vendor:offline-runtime": "bash ./packages/renderer/tests/audit-vendor-offline-runtime.sh",
+    "test:vendor:smoke": "bash ./packages/renderer/tests/smoke/vendor-smoke.sh",
+    "test:vendor:e2e": "bash ./packages/renderer/tests/e2e/vendor-e2e.sh",
+    "test:podman:vendor": "bash ./packages/renderer/podman/test-podman-vendor.sh",
+    "test:podman:smoke": "bash ./packages/renderer/tests/smoke/podman-smoke.sh",
+    "test:podman:e2e": "bash ./packages/renderer/tests/e2e/podman-e2e.sh",
+    "test:beautiful:smoke": "bash ./packages/renderer/run-beautiful-mermaid-smoke.sh",
+    "test:beautiful:benchmark": "bash ./packages/renderer/run-beautiful-mermaid-benchmark.sh",
+    "vendor:refresh": "npm install --prefix ./packages/renderer/vendor/node --include=prod --ignore-scripts && node ./packages/renderer/scripts/write-vendor-manifest.mjs",
+    "vendor:manifest": "node ./packages/renderer/scripts/write-vendor-manifest.mjs",
+    "package:zip": "node ./scripts/package-zip.mjs",
+    "package:npm:dry-run": "npm pack --dry-run",
+    "container:build": "docker build -f containers/Containerfile -t vaults-diagram-tools:local .",
+    "podman:build": "podman build -f containers/Containerfile -t vaults-diagram-tools:local ."
+  },
+  "dependencies": {
+    "@iconify-json/fa": "1.2.2",
+    "@iconify-json/logos": "1.2.11",
+    "@iconify-json/lucide": "1.2.105",
+    "@modelcontextprotocol/sdk": "^1.27.0",
+    "@resvg/resvg-wasm": "2.6.2",
+    "beautiful-mermaid": "1.1.3",
+    "dejavu-fonts-ttf": "2.37.3",
+    "jpeg-js": "0.4.4",
+    "shiki": "3.23.0",
+    "zod": "^3.25.76"
+  },
+  "author": "Malnati",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malnati/vaults-diagram-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/malnati/vaults-diagram-tools/issues"
+  },
+  "homepage": "https://malnati.github.io/vaults-diagram-tools/",
+  "keywords": [
+    "mermaid",
+    "diagrams",
+    "source-code-analysis",
+    "mcp",
+    "nodejs",
+    "svg",
+    "jpeg",
+    "offline-assets",
+    "docker",
+    "podman",
+    "github-actions"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

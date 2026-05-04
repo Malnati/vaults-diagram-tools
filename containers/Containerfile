@@ -1,0 +1,20 @@
+FROM node:20-bookworm-slim AS build
+
+WORKDIR /opt/vaults-diagram-tools
+COPY package.json package-lock.json ./
+COPY packages/renderer/package.json ./packages/renderer/package.json
+COPY packages/renderer/vendor/node/package.json ./packages/renderer/vendor/node/package.json
+COPY packages/renderer/vendor/node/package-lock.json ./packages/renderer/vendor/node/package-lock.json
+RUN npm ci --omit=dev --ignore-scripts
+COPY . .
+RUN npm run vendor:refresh \
+ && test -f packages/renderer/render-mermaid-assets.mjs \
+ && test -d packages/renderer/vendor/node/node_modules
+
+FROM node:20-bookworm-slim
+ENV NODE_ENV=production \
+    MMDC_VENDOR_ONLY=1 \
+    MMDC_VENDOR_NODE_ROOT=/opt/vaults-diagram-tools/packages/renderer/vendor/node
+WORKDIR /work
+COPY --from=build /opt/vaults-diagram-tools /opt/vaults-diagram-tools
+ENTRYPOINT ["node", "/opt/vaults-diagram-tools/packages/renderer/render-mermaid-assets.mjs"]

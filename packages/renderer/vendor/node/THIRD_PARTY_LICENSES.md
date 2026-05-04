@@ -1,0 +1,58 @@
+# packages/renderer vendor licenses
+
+Vendored dependencies for offline Node-only Mermaid rendering.
+
+- @iconify-json/fa@1.2.2: OFL-1.1
+- @iconify-json/logos@1.2.11: CC0-1.0
+- @iconify-json/lucide@1.2.105: ISC
+- @iconify/types@2.0.0: MIT
+- @resvg/resvg-wasm@2.6.2: MPL-2.0
+- @shikijs/core@3.23.0: MIT
+- @shikijs/engine-javascript@3.23.0: MIT
+- @shikijs/engine-oniguruma@3.23.0: MIT
+- @shikijs/langs@3.23.0: MIT
+- @shikijs/themes@3.23.0: MIT
+- @shikijs/types@3.23.0: MIT
+- @shikijs/vscode-textmate@10.0.2: MIT
+- @types/hast@3.0.4: MIT
+- @types/mdast@4.0.4: MIT
+- @types/unist@3.0.3: MIT
+- @ungap/structured-clone@1.3.0: ISC
+- beautiful-mermaid@1.1.3: MIT
+- ccount@2.0.1: MIT
+- character-entities-html4@2.1.0: MIT
+- character-entities-legacy@3.0.0: MIT
+- comma-separated-tokens@2.0.3: MIT
+- dejavu-fonts-ttf@2.37.3: SEE LICENSE IN README.md AND LICENSE
+- dequal@2.0.3: MIT
+- devlop@1.1.0: MIT
+- elkjs@0.11.1: EPL-2.0
+- entities@7.0.1: BSD-2-Clause
+- hast-util-to-html@9.0.5: MIT
+- hast-util-whitespace@3.0.0: MIT
+- html-void-elements@3.0.0: MIT
+- jpeg-js@0.4.4: BSD-3-Clause
+- mdast-util-to-hast@13.2.1: MIT
+- micromark-util-character@2.1.1: MIT
+- micromark-util-encode@2.0.1: MIT
+- micromark-util-sanitize-uri@2.0.1: MIT
+- micromark-util-symbol@2.0.1: MIT
+- micromark-util-types@2.0.2: MIT
+- oniguruma-parser@0.12.2: MIT
+- oniguruma-to-es@4.3.6: MIT
+- property-information@7.1.0: MIT
+- regex@6.1.0: MIT
+- regex-recursion@6.0.2: MIT
+- regex-utilities@2.3.0: MIT
+- shiki@3.23.0: MIT
+- space-separated-tokens@2.0.2: MIT
+- stringify-entities@4.0.4: MIT
+- trim-lines@3.0.1: MIT
+- unist-util-is@6.0.1: MIT
+- unist-util-position@5.0.0: MIT
+- unist-util-stringify-position@4.0.0: MIT
+- unist-util-visit@5.1.0: MIT
+- unist-util-visit-parents@6.0.2: MIT
+- vfile@6.0.3: MIT
+- vfile-message@4.0.3: MIT
+- zwitch@2.0.4: MIT

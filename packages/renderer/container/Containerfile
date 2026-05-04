@@ -1,0 +1,12 @@
+FROM node:20-bookworm-slim
+
+ENV NODE_ENV=production \
+    MMDC_VENDOR_ONLY=1 \
+    MMDC_VENDOR_NODE_ROOT=/opt/vaults-diagram-tools/packages/renderer/vendor/node
+
+WORKDIR /work
+COPY . /opt/vaults-diagram-tools/packages/renderer
+RUN test -f /opt/vaults-diagram-tools/packages/renderer/render-mermaid-assets.mjs \
+ && test -f /opt/vaults-diagram-tools/packages/renderer/vendor/node/package.json \
+ && test -d /opt/vaults-diagram-tools/packages/renderer/vendor/node/node_modules
+ENTRYPOINT ["node", "/opt/vaults-diagram-tools/packages/renderer/render-mermaid-assets.mjs"]

@@ -1,0 +1,15 @@
+classDiagram
+    class Cliente
+    class Servidor
+
+    Cliente --> Servidor : consome
+
+    class Cliente {
+      +string id
+      +solicitar()
+    }
+
+    class Servidor {
+      +int status
+      +processar()
+    }

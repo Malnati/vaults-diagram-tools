@@ -1,0 +1,14 @@
+sequenceDiagram
+    autonumber
+    participant U as Assinante
+    participant App as App Casa Conectada
+    participant PING as PING / CIAM
+    participant APG as Apigee
+    participant BFF as BFF Claro
+
+    U->>App: Credentials / OAuth2 flow
+    App->>PING: OAuth2 authorization
+    PING-->>App: Session tokens (ex.: access / id)
+    App->>APG: API HTTPS + token (gateway policies)
+    APG->>BFF: Pedido validado / roteado
+    Note over BFF: Business identity: CPF<br/>and contract context

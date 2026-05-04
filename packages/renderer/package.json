@@ -1,0 +1,18 @@
+{
+  "name": "@vaults-diagram-tools/renderer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:beautiful:smoke": "bash ./run-beautiful-mermaid-smoke.sh",
+    "test:beautiful:benchmark": "bash ./run-beautiful-mermaid-benchmark.sh",
+    "test:vendor:offline": "bash ./tests/test-vendor-offline.sh",
+    "vendor:refresh": "npm install --prefix ./vendor/node --include=prod --ignore-scripts && node ./scripts/write-vendor-manifest.mjs",
+    "vendor:manifest": "node ./scripts/write-vendor-manifest.mjs",
+    "test:podman:vendor": "bash ./podman/test-podman-vendor.sh",
+    "audit:vendor:offline-runtime": "bash ./tests/audit-vendor-offline-runtime.sh",
+    "test:vendor:smoke": "bash ./tests/smoke/vendor-smoke.sh",
+    "test:vendor:e2e": "bash ./tests/e2e/vendor-e2e.sh",
+    "test:podman:smoke": "bash ./tests/smoke/podman-smoke.sh",
+    "test:podman:e2e": "bash ./tests/e2e/podman-e2e.sh"
+  }
+}

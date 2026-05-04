@@ -1,0 +1,9 @@
+{
+  "name": "@vaults-diagram-tools/source-diagrams",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check source-diagrams.mjs && node --test tests/*.test.mjs",
+    "test": "node --test tests/*.test.mjs"
+  }
+}
