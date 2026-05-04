@@ -1,6 +1,6 @@
 {
   "name": "vaults-diagram-tools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline assets, and MCP workflows.",
   "type": "module",
   "license": "MIT",
@@ -36,7 +36,8 @@
     "LICENSE",
     "CHANGELOG.md",
     "NOTICE.md",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "server.json"
   ],
   "scripts": {
     "check": "node --check packages/renderer/render-mermaid-assets.mjs && node --check packages/source-diagrams/source-diagrams.mjs && node --check packages/mcp/server.mjs && node --check packages/mcp/tools.mjs",
@@ -98,5 +99,6 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "mcpName": "io.github.malnati/vaults-diagram-tools"
 }

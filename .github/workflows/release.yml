@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   packages: write
+  id-token: write
 
 jobs:
   release:
@@ -71,3 +72,23 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Wait for npm package availability
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          for attempt in $(seq 1 12); do
+            if npm view "vaults-diagram-tools@${version}" version; then
+              exit 0
+            fi
+            echo "npm package vaults-diagram-tools@${version} not visible yet; retry ${attempt}/12"
+            sleep 10
+          done
+          npm view "vaults-diagram-tools@${version}" version
+      - name: Install MCP publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+      - name: Validate MCP Registry metadata
+        run: ./mcp-publisher validate
+      - name: Authenticate to MCP Registry
+        run: ./mcp-publisher login github-oidc
+      - name: Publish MCP Registry metadata
+        run: ./mcp-publisher publish
