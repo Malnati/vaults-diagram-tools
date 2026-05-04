@@ -34,6 +34,10 @@ jobs:
         run: npm pack --dry-run
       - name: Build zip package
         run: npm run package:zip
+      - name: Install VS Code extension dependencies
+        run: npm run vscode:install
+      - name: Package VS Code extension
+        run: npm run vscode:package
       - name: Build container image
         run: docker build -f containers/Containerfile -t vaults-diagram-tools:ci .
       - name: Write branded summary

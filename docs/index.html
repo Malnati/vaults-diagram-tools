@@ -326,14 +326,16 @@
         <h1 id="hero-title"><span class="line">Mermaid to assets.</span><span class="line">Source code to maps.</span><span class="line accent">MCP for agents.</span></h1>
         <p class="lead">A standalone toolkit for teams that need reproducible Mermaid assets, source-code diagrams, and agent-friendly diagram workflows without carrying Vault-specific content.</p>
         <div class="hero-actions" aria-label="Primary actions">
-          <a class="button primary" href="https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3">Install npm 0.1.3</a>
+          <a class="button primary" href="https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4">Install npm 0.1.4</a>
+          <a class="button secondary" href="https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix">Download VSIX</a>
           <a class="button secondary" href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools">MCP Registry active</a>
           <a class="button" href="https://quay.io/repository/ricardomalnati/vaults-diagram-tools">Quay.io image</a>
           <a class="button" href="https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools">Smithery</a>
           <a class="button" href="https://github.com/malnati/vaults-diagram-tools">View on GitHub</a>
         </div>
         <div class="trust-row" aria-label="Project guarantees">
-          <span class="pill"><strong>npm</strong> 0.1.3</span>
+          <span class="pill"><strong>npm</strong> 0.1.4</span>
+          <span class="pill"><strong>VS Code</strong> VSIX</span>
           <span class="pill"><strong>MCP Registry</strong> active</span>
           <span class="pill"><strong>Quay.io</strong> v0.1.0</span>
           <span class="pill"><strong>Node</strong> ≥20.11</span>
@@ -475,12 +477,12 @@ npx vaults-diagram-mcp</code></pre>
           <p class="eyebrow">Distribution</p>
           <h2 id="distribution-title">Install where the workflow runs.</h2>
         </div>
-        <p>Use npm 0.1.3 for projects, npx for one-shot automation, MCP Registry or Smithery for discovery, GHCR/release assets for offline handoff, and Quay.io for Podman pulls.</p>
+        <p>Use npm 0.1.4 for projects, npx for one-shot automation, VS Code VSIX or Marketplace for editor workflows, MCP Registry or Smithery for discovery, GHCR/release assets for offline handoff, and Quay.io for Podman pulls.</p>
       </div>
       <div class="grid two">
         <article class="card">
           <h3>npm and one-shot npx</h3>
-          <p>Current npm latest is <a href="https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3"><code>vaults-diagram-tools@0.1.3</code></a>.</p>
+          <p>Current npm latest is <a href="https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4"><code>vaults-diagram-tools@0.1.4</code></a>.</p>
           <pre><code>npm install -D vaults-diagram-tools
 npx --yes --package vaults-diagram-tools vaults-mermaid-render diagram.mmd --output-dir out</code></pre>
         </article>
@@ -488,7 +490,7 @@ npx --yes --package vaults-diagram-tools vaults-mermaid-render diagram.mmd --out
           <h3>Container image</h3>
           <p>Use GHCR for the GitHub release image or Quay.io for the published Podman image.</p>
           <pre><code>docker run --rm \
-  ghcr.io/malnati/vaults-diagram-tools:v0.1.1 \
+  ghcr.io/malnati/vaults-diagram-tools:v0.1.4 \
   --help
 
 podman run --rm \
@@ -497,11 +499,16 @@ podman run --rm \
         </article>
         <article class="card">
           <h3>GitHub release</h3>
-          <p><a href="https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.1">Release v0.1.1</a> remains the latest GitHub release and GHCR artifact line; Quay.io carries the Podman image at <a href="https://quay.io/repository/ricardomalnati/vaults-diagram-tools"><code>v0.1.0</code></a>; npm and MCP Registry metadata are at 0.1.3.</p>
+          <p><a href="https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.4">Release v0.1.4</a> is the latest GitHub release, GHCR artifact line, npm package, MCP Registry metadata, and VS Code VSIX line; Quay.io carries the Podman image at <a href="https://quay.io/repository/ricardomalnati/vaults-diagram-tools"><code>v0.1.0</code></a>.</p>
+          <p><a href="https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix">Download the VS Code VSIX</a> and install with <code>code --install-extension vaults-diagram-tools-vscode-0.1.4.vsix</code>.</p>
+        </article>
+        <article class="card">
+          <h3>VS Code extension</h3>
+          <p>Install <a href="https://marketplace.visualstudio.com/items?itemName=malnati.vaults-diagram-tools"><code>malnati.vaults-diagram-tools</code></a> from Marketplace, <a href="https://open-vsx.org/extension/malnati/vaults-diagram-tools">Open VSX</a>, or the direct <a href="https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix">GitHub Release VSIX</a>.</p>
         </article>
         <article class="card">
           <h3>MCP Registry</h3>
-          <p><a href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools"><code>io.github.Malnati/vaults-diagram-tools</code></a> is active at version <code>0.1.3</code>; PR <a href="https://github.com/Malnati/vaults-diagram-tools/pull/17">#17</a> aligned the publisher name.</p>
+          <p><a href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools"><code>io.github.Malnati/vaults-diagram-tools</code></a> is active at version <code>0.1.4</code>; PR <a href="https://github.com/Malnati/vaults-diagram-tools/pull/17">#17</a> aligned the publisher name.</p>
         </article>
         <article class="card">
           <h3>Smithery</h3>
@@ -525,7 +532,7 @@ podman run --rm \
           <li><strong>Markdown policy:</strong> keep Mermaid source linked as <code>.mmd</code>, render <code>.svg</code> and <code>.jpg</code>, and show inline source with <code>mermaid</code> fences.</li>
           <li><strong>Credits:</strong> Dracula palette through <code>beautiful-mermaid</code>; Iconify JSON packages for Font Awesome 4, SVG Logos, and Lucide Icons.</li>
           <li><strong>Validation:</strong> <code>npm test</code> includes license notice checks plus renderer, source-diagram, and MCP tests.</li>
-          <li><strong>Distribution:</strong> npm <code>0.1.3</code>, MCP Registry <code>active</code> at <code>0.1.3</code>, Smithery published, GitHub Release/GHCR <code>v0.1.1</code>, Quay.io Podman image <code>v0.1.0</code>.</li>
+          <li><strong>Distribution:</strong> npm <code>0.1.4</code>, MCP Registry <code>active</code> at <code>0.1.4</code>, Smithery published, VS Code VSIX and Marketplace targets, GitHub Release/GHCR <code>v0.1.4</code>, Quay.io Podman image <code>v0.1.0</code>.</li>
         </ul>
       </div>
     </section>
@@ -534,10 +541,11 @@ podman run --rm \
       <span>vaults-diagram-tools · portable Mermaid and source-code diagram tooling</span>
       <div class="footer-links">
         <a href="https://github.com/malnati/vaults-diagram-tools">GitHub</a>
-        <a href="https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3">npm 0.1.3</a>
+        <a href="https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4">npm 0.1.4</a>
         <a href="https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools">MCP Registry</a>
         <a href="https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools">Smithery</a>
-        <a href="https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.1">Release v0.1.1</a>
+        <a href="https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.4">Release v0.1.4</a>
+        <a href="https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix">VSIX 0.1.4</a>
         <a href="https://quay.io/repository/ricardomalnati/vaults-diagram-tools">Quay.io image</a>
         <a href="https://github.com/apps/vaults-diagram-tools">GitHub App</a>
         <a href="vaults-compatibility.md">Vaults compatibility</a>

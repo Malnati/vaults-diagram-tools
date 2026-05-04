@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-05-04
+
+### Added
+
+- Added the publishable VS Code extension package `malnati.vaults-diagram-tools` with bundled runtime commands for Mermaid rendering, source diagram generation, Markdown policy validation, and native MCP stdio server registration.
+- Added VS Code Marketplace and Open VSX packaging/publishing scripts and release workflow steps.
+
 ## [0.1.3] - 2026-05-04
 
 ### Fixed

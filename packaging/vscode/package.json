@@ -1,29 +1,115 @@
 {
-  "name": "vaults-diagram-tools-vscode",
+  "name": "vaults-diagram-tools",
   "displayName": "Vaults Diagram Tools",
   "description": "Mermaid to assets. Source code to maps. MCP for agents.",
   "icon": "icon.png",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "malnati",
-  "engines": {
-    "vscode": "^1.90.0"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malnati/vaults-diagram-tools.git"
   },
-  "categories": ["Other"],
-  "activationEvents": [],
+  "bugs": {
+    "url": "https://github.com/malnati/vaults-diagram-tools/issues"
+  },
+  "homepage": "https://malnati.github.io/vaults-diagram-tools/",
+  "engines": {
+    "vscode": "^1.118.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "mermaid",
+    "diagram",
+    "mcp",
+    "source-diagrams",
+    "svg",
+    "jpeg"
+  ],
+  "main": "./extension.cjs",
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:vaultsDiagramTools.renderCurrentMermaid",
+    "onCommand:vaultsDiagramTools.generateSourceDiagrams",
+    "onCommand:vaultsDiagramTools.validateMarkdownDiagramPolicy"
+  ],
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "package": "mkdir -p ../../dist && vsce package --out ../../dist/vaults-diagram-tools-vscode-$(node -p \"require('./package.json').version\").vsix",
+    "publish:marketplace": "vsce publish --packagePath ../../dist/vaults-diagram-tools-vscode-$(node -p \"require('./package.json').version\").vsix",
+    "publish:openvsx": "ovsx publish ../../dist/vaults-diagram-tools-vscode-$(node -p \"require('./package.json').version\").vsix"
+  },
+  "dependencies": {
+    "vaults-diagram-tools": "0.1.4"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "3.9.1",
+    "ovsx": "0.10.11"
+  },
   "contributes": {
     "commands": [
       {
         "command": "vaultsDiagramTools.renderCurrentMermaid",
-        "title": "Vaults Diagram Tools: Render Current Mermaid File"
+        "title": "Vaults Diagram Tools: Render Current Mermaid File",
+        "category": "Vaults Diagram Tools"
+      },
+      {
+        "command": "vaultsDiagramTools.generateSourceDiagrams",
+        "title": "Vaults Diagram Tools: Generate Source Diagrams",
+        "category": "Vaults Diagram Tools"
+      },
+      {
+        "command": "vaultsDiagramTools.validateMarkdownDiagramPolicy",
+        "title": "Vaults Diagram Tools: Validate Markdown Diagram Policy",
+        "category": "Vaults Diagram Tools"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "vaultsDiagramTools.renderCurrentMermaid",
+          "when": "resourceExtname == .mmd || resourceExtname == .mermaid",
+          "group": "navigation"
+        },
+        {
+          "command": "vaultsDiagramTools.validateMarkdownDiagramPolicy",
+          "when": "resourceExtname == .md",
+          "group": "navigation"
+        }
+      ]
+    },
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "vaultsDiagramTools",
+        "label": "Vaults Diagram Tools MCP"
       }
     ],
     "configuration": {
       "title": "Vaults Diagram Tools",
       "properties": {
-        "vaultsDiagramTools.cliPath": {
+        "vaultsDiagramTools.outputDirectoryName": {
           "type": "string",
-          "default": "vaults-mermaid-render",
-          "description": "Path to vaults-mermaid-render CLI."
+          "default": "diagrams",
+          "description": "Default output directory name for generated source diagrams."
+        },
+        "vaultsDiagramTools.sourceDiagramsRenderMode": {
+          "type": "string",
+          "enum": [
+            "canonical",
+            "placeholder"
+          ],
+          "default": "canonical",
+          "description": "Render mode passed to vaults-source-diagrams. Use placeholder for fast structural checks."
         }
       }
     }

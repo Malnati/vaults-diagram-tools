@@ -18,6 +18,7 @@ from pathlib import Path
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ROOT = Path.cwd()
+CWD_ROOT = DEFAULT_ROOT.resolve()
 MMD_FENCE_BLOCK = re.compile(r"```mmd\s*\n", re.IGNORECASE)
 SVG_IMAGE_EMBED = re.compile(r"!\[[^\]]*\]\(([^)]+?\.svg)\)", re.IGNORECASE)
 
@@ -26,9 +27,9 @@ def iter_markdown(paths: list[Path]) -> list[Path]:
     files: list[Path] = []
     for path in paths:
         if path.is_file() and path.suffix.lower() == ".md":
-            files.append(path)
+            files.append(path.resolve())
         elif path.is_dir():
-            files.extend(sorted(path.rglob("*.md")))
+            files.extend(sorted(md.resolve() for md in path.rglob("*.md")))
         else:
             raise FileNotFoundError(path)
     return files

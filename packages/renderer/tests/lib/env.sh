@@ -8,6 +8,7 @@ FIXTURES_DIR="$TESTS_DIR/fixtures/beautiful-mermaid"
 CLI="$TOOLS_DIR/render-mermaid-assets.mjs"
 WRAPPER="$TOOLS_DIR/render-mermaid-assets.sh"
 NODE_BIN="${NODE_BIN:-$(command -v node)}"
+PYTHON_BIN="${PYTHON_BIN:-$(command -v python3 || true)}"
 OUTPUT_ROOT="${MERMAID_TEST_OUTPUT_ROOT:-$TESTS_DIR/output}"
 IMAGE="${MERMAID_RENDER_IMAGE:-vaults-mermaid-render:vendor}"
 NETWORK_GUARD="$TESTS_DIR/lib/network-guard.mjs"
@@ -15,6 +16,10 @@ NETWORK_GUARD="$TESTS_DIR/lib/network-guard.mjs"
 if [[ -z "$NODE_BIN" || ! -x "$NODE_BIN" ]]; then
   echo "node not found" >&2
   exit 127
+fi
+if [[ -n "$PYTHON_BIN" ]]; then
+  export PYTHON_BIN
+  export MERMAID_OFFLINE_ALLOWED_PYTHON_CHECKER="$TOOLS_DIR/check-markdown-diagram-policy.py"
 fi
 
 source "$SCRIPT_DIR/assertions.sh"
