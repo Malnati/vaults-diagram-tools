@@ -1,0 +1,16 @@
+---
+description: Renderização Mermaid canônica com vaults-diagram-tools
+globs:
+  - "packages/renderer/**/*"
+  - "examples/**/*.mmd"
+  - "examples/**/*.mermaid"
+  - "docs/**/*.md"
+  - "README.md"
+alwaysApply: false
+---
+
+- Use `vaults-mermaid-render` ou `node packages/renderer/render-mermaid-assets.mjs` para renderização canônica.
+- Cada fonte `.mmd` / `.mermaid` renderizada deve gerar `.svg` e `.jpg` no mesmo ciclo.
+- Em Markdown, use bloco cercado com linguagem `mermaid`; não use `mmd` como linguagem do bloco.
+- Linke `.mmd`, `.svg` e `.jpg` com caminhos relativos; não embuta SVG/JPEG por padrão.
+- Quando alterar Markdown com diagramas, valide com `vaults-markdown-diagram-policy` ou `packages/renderer/check-markdown-diagram-policy.py`.

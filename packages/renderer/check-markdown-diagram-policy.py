@@ -17,10 +17,7 @@ import sys
 from pathlib import Path
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
-CWD_ROOT = Path.cwd()
-DEFAULT_ROOT = CWD_ROOT / "Obsidian" / "Claro" / "markdown"
-if not DEFAULT_ROOT.exists():
-    DEFAULT_ROOT = CWD_ROOT
+DEFAULT_ROOT = Path.cwd()
 MMD_FENCE_BLOCK = re.compile(r"```mmd\s*\n", re.IGNORECASE)
 SVG_IMAGE_EMBED = re.compile(r"!\[[^\]]*\]\(([^)]+?\.svg)\)", re.IGNORECASE)
 

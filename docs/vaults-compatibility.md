@@ -1,6 +1,6 @@
 # Vaults compatibility
 
-`vaults-diagram-tools` was extracted from `/Users/mal/Documents/Vaults/tools-repo` into the standalone GitHub repository `malnati/vaults-diagram-tools`.
+`vaults-diagram-tools` was extracted from the legacy Vaults `tools-repo` workspace into the standalone GitHub repository `malnati/vaults-diagram-tools`.
 
 Legacy Vaults paths remain as compatibility shims only:
 

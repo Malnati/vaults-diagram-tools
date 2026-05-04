@@ -3,8 +3,8 @@
 # Usage:
 #   packages/renderer/render-mermaid-assets.sh <file-or-directory> [...]
 # Exemplos:
-#   packages/renderer/render-mermaid-assets.sh "Obsidian/Claro/markdown/Trasnferencia Rapida/README/assets"
-#   MMDC=/path/to/mmdc packages/renderer/render-mermaid-assets.sh --width 2400 --height 1800 docs/assets
+#   packages/renderer/render-mermaid-assets.sh docs/assets/diagrams
+#   MMDC_RENDER_ENGINE=mmdc MMDC=bin/mmdc packages/renderer/render-mermaid-assets.sh --width 2400 --height 1800 docs/assets
 set -euo pipefail
 ORIGINAL_ARGS=("$@")
 
@@ -14,18 +14,20 @@ BACKGROUND=white
 JPEG_QUALITY=92
 THEME=default
 PUPPETEER_CONFIG="${PUPPETEER_CONFIG:-${PUPPETEER_CONFIG_FILE:-}}"
+PUPPETEER_CONFIG_DEFAULT="${PUPPETEER_CONFIG_DEFAULT:-}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GLOBAL_MERMAID_CONFIG_FILE="${MMDC_GLOBAL_CONFIG_FILE:-$SCRIPT_DIR/global-mermaid-theme.json}"
 GLOBAL_MERMAID_CSS_FILE="${MMDC_GLOBAL_CSS_FILE:-$SCRIPT_DIR/sequence-diagram.css}"
 BM_RENDERER_SCRIPT="$SCRIPT_DIR/render-mermaid-bm.mjs"
 ASCII_RENDERER_SCRIPT="$SCRIPT_DIR/render-mermaid-ascii.mjs"
 
-MMDC_RENDER_ENGINE="${MMDC_RENDER_ENGINE:-${MMDC_RENDER_BACKEND:-mmdc}}"
+MMDC_RENDER_ENGINE="${MMDC_RENDER_ENGINE:-${MMDC_RENDER_BACKEND:-vendor}}"
 MMDC_ALLOW_NPX="${MMDC_ALLOW_NPX:-0}"
+MMDC_ALLOW_MMDC_FALLBACK="${MMDC_ALLOW_MMDC_FALLBACK:-0}"
 MMDC_RENDER_ENGINE="$(echo "$MMDC_RENDER_ENGINE" | tr '[:upper:]' '[:lower:]')"
 if [[ "$MMDC_RENDER_ENGINE" != "mmdc" && "$MMDC_RENDER_ENGINE" != "beautiful" && "$MMDC_RENDER_ENGINE" != "bm" && "$MMDC_RENDER_ENGINE" != "vendor" ]]; then
-  echo "Unknown engine in MMDC_RENDER_ENGINE=[$MMDC_RENDER_ENGINE]; using mmdc." >&2
-  MMDC_RENDER_ENGINE="mmdc"
+  echo "Unknown engine in MMDC_RENDER_ENGINE=[$MMDC_RENDER_ENGINE]; using vendor." >&2
+  MMDC_RENDER_ENGINE="vendor"
 fi
 
 if [[ "$MMDC_RENDER_ENGINE" == "vendor" || "${MMDC_VENDOR_ONLY:-0}" == "1" ]]; then
@@ -102,12 +104,13 @@ Options:
   -h, --help                Show this help.
 
 Environment variables:
-  MMDC_RENDER_ENGINE        vendor | mmdc | beautiful | bm (default: mmdc)
+  MMDC_RENDER_ENGINE        vendor | mmdc | beautiful | bm (default: vendor)
   MMDC_RENDER_BACKEND       Alias for MMDC_RENDER_ENGINE
   MMDC_VENDOR_ONLY          1 to delegate to the vendored JS/WASM renderer and block external fallback.
   MMDC_VENDOR_NODE_ROOT     vendor/node directory for vendor mode (default: packages/renderer/vendor/node).
   MMDC_RASTER_SCALE         Vendor only: PNG/JPEG scale through WASM (default: 2).
   MMDC_ALLOW_NPX            1 to re-enable npx fallback in mmdc mode (default: 0).
+  MMDC_ALLOW_MMDC_FALLBACK  1 to allow beautiful/bm mode to fall back to mmdc (default: 0).
   MMDC_BM_THEME             beautiful-mermaid theme (built-in name, JSON, or path)
   MMDC_BM_BG                bg color for beautiful-mermaid
   MMDC_BM_FG                fg color for beautiful-mermaid
@@ -133,11 +136,12 @@ Environment variables:
   MMDC_ASCII_BORDER_PADDING Inner box padding in the ASCII sidecar (default: 1)
   MMDC_ASCII_COORDS         1 to generate <base>.coords.txt when possible
   MERMAID_ASCII_BIN         Explicit path to the mermaid-ascii binary.
-  MMDC                      Path to mmdc. If missing, tries PATH, ~/.cache/mermaid-cli, and npx only with MMDC_ALLOW_NPX=1.
+  MMDC                      Path to mmdc in explicit mmdc mode. If missing, tries PATH, ~/.cache/mermaid-cli, and npx only with MMDC_ALLOW_NPX=1.
   MMDC_EXTRA_ARGS           Argumentos extras passados ao mmdc.
   MMDC_GLOBAL_CONFIG_FILE   Mermaid configuration file for global injection through --configFile (default: packages/renderer/global-mermaid-theme.json).
   MMDC_GLOBAL_CSS_FILE      Global CSS for injection through --cssFile (default: packages/renderer/sequence-diagram.css).
   PUPPETEER_CONFIG          Same as --puppeteer-config.
+  PUPPETEER_CONFIG_DEFAULT  Optional fallback Puppeteer config path when PUPPETEER_CONFIG is unset.
   MMDC_ICON_PREFIXES        Mermaid prefixes to process (default: fa,logos,lucide).
   MMDC_ICON_MAP_FILE        Path to a prepared icon map (reused when set).
   MMDC_STRICT_ICON_INJECTION Set '1' to fail injection when unresolved tokens remain.
@@ -571,14 +575,23 @@ if [[ ${#mmd_files[@]} -eq 0 ]]; then
   exit 1
 fi
 
-find_mmdc_cmd
+needs_mmdc=0
+if [[ "$MMDC_RENDER_ENGINE" == "mmdc" ]]; then
+  needs_mmdc=1
+elif [[ "$MMDC_ALLOW_MMDC_FALLBACK" == "1" && ( "$MMDC_RENDER_ENGINE" == "beautiful" || "$MMDC_RENDER_ENGINE" == "bm" ) ]]; then
+  needs_mmdc=1
+fi
+
+if [[ "$needs_mmdc" -eq 1 ]]; then
+  find_mmdc_cmd
+fi
 find_converter_cmd
 
 puppeteer_args=()
 if [[ -n "$PUPPETEER_CONFIG" ]]; then
   puppeteer_args=(-p "$PUPPETEER_CONFIG")
-elif [[ -f /tmp/puppeteer-no-sandbox.json ]]; then
-  puppeteer_args=(-p /tmp/puppeteer-no-sandbox.json)
+elif [[ -n "$PUPPETEER_CONFIG_DEFAULT" && -f "$PUPPETEER_CONFIG_DEFAULT" ]]; then
+  puppeteer_args=(-p "$PUPPETEER_CONFIG_DEFAULT")
 fi
 
 # shellcheck disable=SC2206
@@ -674,8 +687,15 @@ for mmd in "${mmd_files[@]}"; do
   used_engine="mmdc"
   if [[ "$renderer_mode" == "beautiful" ]]; then
     if ! render_with_beautiful_mermaid "$mmd" "$svg" "$txt_out"; then
-      echo "  ⚠️ beautiful-mermaid failed; using mmdc fallback for: $mmd" >&2
-      render_with_mmdc "$mmd" "$svg" "$png_tmp"
+      if [[ "$MMDC_ALLOW_MMDC_FALLBACK" == "1" ]]; then
+        echo "  ⚠️ beautiful-mermaid failed; using explicit mmdc fallback for: $mmd" >&2
+        render_with_mmdc "$mmd" "$svg" "$png_tmp"
+      else
+        echo "  ❌ beautiful-mermaid failed and mmdc fallback is disabled for: $mmd" >&2
+        echo "     Use MMDC_RENDER_ENGINE=mmdc for explicit mmdc/Puppeteer rendering, or MMDC_ALLOW_MMDC_FALLBACK=1 for fallback." >&2
+        failed=1
+        continue
+      fi
     else
       used_engine="beautiful"
     fi

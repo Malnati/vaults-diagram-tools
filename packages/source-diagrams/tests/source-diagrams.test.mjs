@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { chmod, mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -83,6 +83,7 @@ test("CLI without arguments prints usage", () => {
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /Usage: source-diagrams\.mjs/);
   assert.match(result.stdout, /--source-dir/);
+  assert.doesNotMatch(result.stdout, /\/(?:repo|tmp|path)\//);
 });
 
 test("missing source directory fails with clear message", async () => {
@@ -314,4 +315,39 @@ test("focused file selectors reject missing files and paths outside source-dir",
   ]);
   assert.notEqual(outside.status, 0);
   assert.match(outside.stderr, /outside source-dir/);
+});
+
+test("canonical render fails instead of falling back to the shell renderer", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "vaults-source-diagrams-no-fallback-"));
+  const sourceDir = path.join(root, "src");
+  const outputDir = path.join(root, "out");
+  await mkdir(sourceDir, { recursive: true });
+  await writeFile(path.join(sourceDir, "index.ts"), "export class A {}\n");
+
+  const failingRenderer = path.join(root, "fail-renderer.mjs");
+  const fallbackRenderer = path.join(root, "fallback-renderer.sh");
+  const fallbackMarker = path.join(root, "fallback-invoked.txt");
+  await writeFile(failingRenderer, "console.error('synthetic renderer failure'); process.exit(17);\n");
+  await writeFile(fallbackRenderer, `#!/usr/bin/env bash
+echo fallback > "${fallbackMarker}"
+exit 0
+`);
+  await chmod(fallbackRenderer, 0o755);
+
+  const result = runCli([
+    "--source-dir", sourceDir,
+    "--output-dir", outputDir,
+    "--langs", "typescript",
+    "--diagrams", "dependency",
+    "--no-index",
+  ], {
+    env: {
+      VAULTS_MERMAID_RENDERER: failingRenderer,
+      VAULTS_MERMAID_RENDERER_SH: fallbackRenderer,
+    },
+  });
+
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /synthetic renderer failure/);
+  await assert.rejects(readFile(fallbackMarker, "utf8"), /ENOENT/);
 });
