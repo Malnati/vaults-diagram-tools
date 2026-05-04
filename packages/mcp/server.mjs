@@ -7,7 +7,7 @@ import { generateSourceDiagrams, renderMermaidFile, renderMermaidText } from "./
 
 const server = new McpServer({
   name: "vaults-diagram-tools",
-  version: "0.1.2",
+  version: "0.1.3",
 });
 
 function resultContent(result) {
