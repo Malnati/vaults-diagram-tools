@@ -136,6 +136,19 @@ Templates in v1:
 - VS Code extension shell
 - CDN facade through npm/jsDelivr/unpkg
 
+## Current release
+
+`v0.1.0` is the first public standalone release of `vaults-diagram-tools`.
+
+| Channel | Status |
+| --- | --- |
+| GitHub Release | [`v0.1.0`](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.0) |
+| Release assets | [`vaults-diagram-tools-0.1.0.tgz`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.tgz) and [`vaults-diagram-tools-0.1.0.zip`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.zip) |
+| npm | [`vaults-diagram-tools@0.1.0`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.0) |
+| Container | [`ghcr.io/malnati/vaults-diagram-tools`](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools) |
+| Automation | [CI](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/ci.yml), [CodeQL](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/codeql.yml), [Pages](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/pages.yml), and [Release](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/release.yml) workflows are published through GitHub Actions. |
+| Documentation | [GitHub Pages](https://malnati.github.io/vaults-diagram-tools/) publishes the `docs/` site. |
+
 ## Documentation
 
 - [GitHub Pages documentation](https://malnati.github.io/vaults-diagram-tools/)
