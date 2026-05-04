@@ -262,18 +262,6 @@
     }
     .diagram-body { padding: 18px; }
     .diagram-links { margin-top: 10px; color: var(--subtle); font-size: 0.92rem; }
-    .brand-assets { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); gap: 18px; align-items: stretch; }
-    .brand-preview {
-      display: block;
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: #0b1020;
-      box-shadow: var(--shadow);
-    }
-    .asset-links { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-    .asset-links li { color: var(--muted); }
-
     .split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 18px; align-items: start; }
     .check-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
     .check-list li {
@@ -300,13 +288,13 @@
     .footer-links { display: flex; flex-wrap: wrap; gap: 12px; }
 
     @media (max-width: 980px) {
-      .hero, .quick-grid, .brand-assets, .split { grid-template-columns: 1fr; }
+      .hero, .quick-grid, .split { grid-template-columns: 1fr; }
       .diagrams, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .nav { align-items: flex-start; flex-direction: column; margin-bottom: 48px; }
     }
     @media (max-width: 680px) {
       .shell { padding: 22px 16px 44px; }
-      .grid.two, .grid.three, .diagrams, .brand-assets { grid-template-columns: 1fr; }
+      .grid.two, .grid.three, .diagrams { grid-template-columns: 1fr; }
       .section-head { align-items: flex-start; flex-direction: column; }
       .hero-actions .button { width: 100%; }
       section { margin-top: 64px; }
@@ -329,7 +317,6 @@
         <a href="#tools">Tools</a>
         <a href="#examples">Examples</a>
         <a href="#distribution">Distribution</a>
-        <a href="#brand-assets">Brand</a>
       </div>
     </nav>
 
@@ -523,31 +510,6 @@ podman run --rm \
         <article class="card">
           <h3>CDN facade</h3>
           <p>Browser-safe helper exports are available through npm CDNs; rendering stays in Node, container, or MCP runtime.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="brand-assets" aria-labelledby="brand-assets-title">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Brand assets</p>
-          <h2 id="brand-assets-title">One visual system for every publication surface.</h2>
-        </div>
-        <p>Repository, Pages, Actions summaries, release notes, social preview, and GitHub App badge use the same generated kit.</p>
-      </div>
-      <div class="brand-assets">
-        <img class="brand-preview" src="assets/brand/repository-banner.png" alt="vaults-diagram-tools repository banner">
-        <article class="card">
-          <h3>Canonical outputs</h3>
-          <ul class="asset-links">
-            <li><a href="assets/brand/brand-manifest.json">Brand manifest</a></li>
-            <li><a href="assets/brand/logo.svg">Logo SVG</a> · <a href="assets/brand/logo.png">Logo PNG</a></li>
-            <li><a href="assets/brand/social-preview.png">Social preview PNG</a> · <a href="assets/brand/social-preview.jpg">JPEG</a></li>
-            <li><a href="assets/brand/github-app-badge.png">GitHub App badge</a></li>
-            <li><a href="assets/brand/actions-banner.png">Actions banner</a></li>
-            <li><a href="assets/brand/release-banner.png">Release banner</a></li>
-          </ul>
-          <p style="margin-top: 18px;">Regenerate with <code>npm run brand:generate</code>; verify with <code>npm run brand:check</code>.</p>
         </article>
       </div>
     </section>
