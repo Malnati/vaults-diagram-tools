@@ -16,6 +16,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { resolveThemeDescriptor } from "./theme-resolver.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+
+function isCliEntryPoint() {
+  if (!process.argv[1]) return false;
+  const argvPath = fs.realpathSync(process.argv[1]);
+  return import.meta.url === pathToFileURL(argvPath).href;
+}
 const REQUIRE = createRequire(import.meta.url);
 const DEFAULT_VENDOR_ROOT = path.join(SCRIPT_DIR, "vendor", "node");
 const DEFAULT_ICON_PREFIXES = ["fa", "logos", "lucide"];
@@ -1001,7 +1007,7 @@ async function main() {
   console.log(`OK: ${files.length} diagram(s) rendered by the JS/WASM runtime.`);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+if (isCliEntryPoint()) {
   main().catch((error) => {
     console.error(error.message);
     process.exit(1);

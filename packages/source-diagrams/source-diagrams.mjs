@@ -16,6 +16,12 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+
+function isCliEntryPoint() {
+  if (!process.argv[1]) return false;
+  const argvPath = fs.realpathSync(process.argv[1]);
+  return import.meta.url === pathToFileURL(argvPath).href;
+}
 const PACKAGE_ROOT = path.resolve(SCRIPT_DIR, "..", "..");
 const DEFAULT_MERMAID_RENDERER = path.resolve(SCRIPT_DIR, "..", "renderer", "render-mermaid-assets.mjs");
 const DEFAULT_MERMAID_RENDERER_SH = path.resolve(SCRIPT_DIR, "..", "renderer", "render-mermaid-assets.sh");
@@ -1234,7 +1240,7 @@ async function main() {
   console.log(`OK: ${runs.length} diagram(s) generated in ${opts.outputDir}`);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+if (isCliEntryPoint()) {
   main().catch((error) => {
     console.error(error.message);
     process.exit(1);
