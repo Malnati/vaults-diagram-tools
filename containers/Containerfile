@@ -12,6 +12,11 @@ RUN npm run vendor:refresh \
  && test -d packages/renderer/vendor/node/node_modules
 
 FROM node:20-bookworm-slim
+LABEL org.opencontainers.image.title="vaults-diagram-tools" \
+      org.opencontainers.image.description="Mermaid to assets. Source code to maps. MCP for agents." \
+      org.opencontainers.image.url="https://malnati.github.io/vaults-diagram-tools/" \
+      org.opencontainers.image.source="https://github.com/Malnati/vaults-diagram-tools" \
+      org.opencontainers.image.licenses="MIT"
 ENV NODE_ENV=production \
     MMDC_VENDOR_ONLY=1 \
     MMDC_VENDOR_NODE_ROOT=/opt/vaults-diagram-tools/packages/renderer/vendor/node

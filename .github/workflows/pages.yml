@@ -1,4 +1,4 @@
-name: pages
+name: Pages · vaults-diagram-tools
 
 on:
   push:
@@ -36,3 +36,12 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Write branded summary
+        if: always()
+        run: |
+          {
+            echo '![vaults-diagram-tools Actions banner](https://malnati.github.io/vaults-diagram-tools/assets/brand/actions-banner.png)'
+            echo
+            echo '### vaults-diagram-tools Pages'
+            echo "Published documentation URL: ${{ steps.deployment.outputs.page_url }}"
+          } >> "$GITHUB_STEP_SUMMARY"

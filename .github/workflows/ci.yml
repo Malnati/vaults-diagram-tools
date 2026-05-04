@@ -1,4 +1,4 @@
-name: ci
+name: CI · vaults-diagram-tools
 
 on:
   push:
@@ -36,3 +36,12 @@ jobs:
         run: npm run package:zip
       - name: Build container image
         run: docker build -f containers/Containerfile -t vaults-diagram-tools:ci .
+      - name: Write branded summary
+        if: always()
+        run: |
+          {
+            echo '![vaults-diagram-tools Actions banner](https://malnati.github.io/vaults-diagram-tools/assets/brand/actions-banner.png)'
+            echo
+            echo '### vaults-diagram-tools CI'
+            echo 'Mermaid to assets. Source code to maps. MCP for agents.'
+          } >> "$GITHUB_STEP_SUMMARY"

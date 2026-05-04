@@ -1,11 +1,14 @@
 # vaults-diagram-tools
 
+![vaults-diagram-tools repository banner](docs/assets/brand/repository-banner.png)
+
 [![CI](https://github.com/malnati/vaults-diagram-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/malnati/vaults-diagram-tools/actions/workflows/ci.yml)
 [![Release](https://github.com/malnati/vaults-diagram-tools/actions/workflows/release.yml/badge.svg)](https://github.com/malnati/vaults-diagram-tools/actions/workflows/release.yml)
-[![License: MIT](https://img.shields.io/github/license/malnati/vaults-diagram-tools)](LICENSE)
-[![Node.js >=20.11](https://img.shields.io/badge/node-%3E%3D20.11-brightgreen)](package.json)
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://malnati.github.io/vaults-diagram-tools/)
-[![Container](https://img.shields.io/badge/container-ghcr.io%2Fmalnati%2Fvaults--diagram--tools-blue)](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools)
+[![License: MIT](https://img.shields.io/github/license/malnati/vaults-diagram-tools?color=67e8f9)](LICENSE)
+[![Node.js >=20.11](https://img.shields.io/badge/node-%3E%3D20.11-67e8f9)](package.json)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-a78bfa)](https://malnati.github.io/vaults-diagram-tools/)
+[![Container](https://img.shields.io/badge/container-ghcr.io%2Fmalnati%2Fvaults--diagram--tools-67e8f9)](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools)
+[![Quay.io](https://img.shields.io/badge/podman-quay.io%2Fricardomalnati%2Fvaults--diagram--tools-a78bfa)](https://quay.io/repository/ricardomalnati/vaults-diagram-tools)
 
 Mermaid to assets. Source code to maps. MCP for agents.
 
@@ -16,7 +19,9 @@ Mermaid to assets. Source code to maps. MCP for agents.
 - [MCP Registry `io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
 - [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.1](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.1)
+- [Quay.io Podman image `quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`](https://quay.io/repository/ricardomalnati/vaults-diagram-tools)
 - [GitHub App](https://github.com/apps/vaults-diagram-tools)
+- [Brand assets](docs/assets/brand/brand-manifest.json)
 - [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 
 ## What is included
@@ -114,11 +119,12 @@ npx vaults-mermaid-render path/to/diagram.mmd --output-dir out
 
 ### GitHub release assets
 
-The latest GitHub Release and GHCR image remain `v0.1.1`; npm and MCP Registry metadata have advanced to `0.1.3`:
+The latest GitHub Release and GHCR image remain `v0.1.1`; the Quay.io Podman image is published at `v0.1.0`; npm and MCP Registry metadata have advanced to `0.1.3`:
 
 - [vaults-diagram-tools-0.1.1.tgz](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz)
 - [vaults-diagram-tools-0.1.1.zip](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip)
 - `ghcr.io/malnati/vaults-diagram-tools:v0.1.1`
+- `quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`
 
 ### Local checkout
 
@@ -143,7 +149,7 @@ docker build -f containers/Containerfile -t vaults-diagram-tools:local .
 podman build -f containers/Containerfile -t vaults-diagram-tools:local .
 ```
 
-Run a render from a container image:
+Run a render from the GHCR image:
 
 ```bash
 docker run --rm \
@@ -152,6 +158,18 @@ docker run --rm \
   ghcr.io/malnati/vaults-diagram-tools:v0.1.1 \
   --output-dir /work/output /work/input/flowchart.mmd
 ```
+
+Run the published Podman image from Quay.io:
+
+```bash
+podman run --rm \
+  -v "$PWD/examples/simple:/work/input:ro" \
+  -v "$PWD/tmp/container-output:/work/output:rw" \
+  quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0 \
+  --output-dir /work/output /work/input/flowchart.mmd
+```
+
+Quay.io also exposes `0.1.0` and `latest` tags for the same published package line.
 
 Podman helper scripts are available through `vaults-mermaid-podman-build`, `vaults-mermaid-podman-render`, and `vaults-mermaid-podman-test`.
 
@@ -219,7 +237,7 @@ flowchart LR
   Install --> Npx["npx one-shot"]
   Install --> GitHub["GitHub npm"]
   Install --> Local["Local checkout"]
-  Install --> Container["Docker Podman GHCR"]
+  Install --> Container["Docker Podman GHCR Quay.io"]
 
   Npm --> Cli["Public CLIs"]
   Npx --> Cli
@@ -276,6 +294,25 @@ flowchart LR
   N3["tools.mjs"]
   N1 --> N3
   N2 --> N3
+```
+
+## Brand assets
+
+The repository, GitHub Pages landing, Actions summaries, release notes, GitHub App badge, and social preview use one deterministic brand kit generated from the current landing visual language.
+
+- [Brand manifest](docs/assets/brand/brand-manifest.json)
+- [Logo SVG](docs/assets/brand/logo.svg) / [Logo PNG](docs/assets/brand/logo.png)
+- [Repository banner](docs/assets/brand/repository-banner.png)
+- [Social preview PNG](docs/assets/brand/social-preview.png) / [Social preview JPEG](docs/assets/brand/social-preview.jpg)
+- [GitHub App badge](docs/assets/brand/github-app-badge.png)
+- [Actions banner](docs/assets/brand/actions-banner.png)
+- [Release banner](docs/assets/brand/release-banner.png)
+
+Regenerate and verify the kit with:
+
+```bash
+npm run brand:generate
+npm run brand:check
 ```
 
 ## Compliance and artifact policy
@@ -335,7 +372,7 @@ The public [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools
 Working in v1:
 
 - npm package publication and GitHub install flow
-- Docker/Podman image
+- Docker/Podman images through GHCR and Quay.io
 - MCP server
 - MCP Registry entry `io.github.Malnati/vaults-diagram-tools` active at version `0.1.3`
 - Smithery server page for `ricardomalnati/vaults-diagram-tools`
@@ -353,7 +390,7 @@ Templates in v1:
 
 ## Current release
 
-`vaults-diagram-tools` is published as npm `0.1.3` and MCP Registry server `io.github.Malnati/vaults-diagram-tools` version `0.1.3`. The latest GitHub Release and GHCR image remain `v0.1.1`.
+`vaults-diagram-tools` is published as npm `0.1.3` and MCP Registry server `io.github.Malnati/vaults-diagram-tools` version `0.1.3`. The latest GitHub Release and GHCR image remain `v0.1.1`; Quay.io carries the Podman image line at `v0.1.0`.
 
 | Channel | Status |
 | --- | --- |
@@ -363,7 +400,8 @@ Templates in v1:
 | MCP Registry | [`io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools), status `active`, version `0.1.3` |
 | Smithery | [`ricardomalnati/vaults-diagram-tools`](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools) is published |
 | Registry PR | [PR #17](https://github.com/Malnati/vaults-diagram-tools/pull/17) aligned the MCP Registry publisher name and was merged. |
-| Container | [`ghcr.io/malnati/vaults-diagram-tools:v0.1.1`](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools) |
+| GHCR container | [`ghcr.io/malnati/vaults-diagram-tools:v0.1.1`](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools) |
+| Quay.io Podman image | [`quay.io/ricardomalnati/vaults-diagram-tools:v0.1.0`](https://quay.io/repository/ricardomalnati/vaults-diagram-tools) |
 | Automation | [CI](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/ci.yml), [CodeQL](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/codeql.yml), [Pages](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/pages.yml), and [Release](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/release.yml) workflows are published through GitHub Actions. |
 | GitHub App | [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools) public read-only app; [install](https://github.com/apps/vaults-diagram-tools/installations/new). |
 | Documentation | [GitHub Pages](https://malnati.github.io/vaults-diagram-tools/) publishes the `docs/` site. |
@@ -378,6 +416,7 @@ Templates in v1:
 - [MCP Registry entry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
 - [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.1](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.1)
+- [Quay.io Podman image](https://quay.io/repository/ricardomalnati/vaults-diagram-tools)
 - [GitHub App](https://github.com/apps/vaults-diagram-tools)
 - [Contributing guide](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)

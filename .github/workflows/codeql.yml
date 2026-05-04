@@ -1,4 +1,4 @@
-name: codeql
+name: CodeQL · vaults-diagram-tools
 
 on:
   push:
@@ -26,3 +26,12 @@ jobs:
           languages: javascript-typescript
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3
+      - name: Write branded summary
+        if: always()
+        run: |
+          {
+            echo '![vaults-diagram-tools Actions banner](https://malnati.github.io/vaults-diagram-tools/assets/brand/actions-banner.png)'
+            echo
+            echo '### vaults-diagram-tools CodeQL'
+            echo 'Mermaid to assets. Source code to maps. MCP for agents.'
+          } >> "$GITHUB_STEP_SUMMARY"
