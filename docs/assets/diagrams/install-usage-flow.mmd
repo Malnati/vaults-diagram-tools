@@ -1,0 +1,22 @@
+flowchart LR
+  Install["Install"] --> Npm["npm registry"]
+  Install --> Npx["npx one-shot"]
+  Install --> GitHub["GitHub npm"]
+  Install --> Local["Local checkout"]
+  Install --> Container["Docker Podman GHCR"]
+
+  Npm --> Cli["Public CLIs"]
+  Npx --> Cli
+  GitHub --> Cli
+  Local --> Cli
+  Container --> Cli
+
+  Cli --> Render["vaults-mermaid-render"]
+  Cli --> Source["vaults-source-diagrams"]
+  Cli --> Mcp["vaults-diagram-mcp"]
+
+  Render --> Svg["SVG Dracula"]
+  Render --> Jpg["JPEG Dracula"]
+  Source --> Mermaid["Mermaid source"]
+  Source --> Svg
+  Mcp --> Tools["3 explicit MCP tools"]

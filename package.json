@@ -34,11 +34,13 @@
     "docs/",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "NOTICE.md",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "scripts": {
     "check": "node --check packages/renderer/render-mermaid-assets.mjs && node --check packages/source-diagrams/source-diagrams.mjs && node --check packages/mcp/server.mjs && node --check packages/mcp/tools.mjs",
-    "test": "npm run check && npm run test:renderer && npm run test:source && npm run test:mcp",
+    "test": "npm run license:check && npm run check && npm run test:renderer && npm run test:source && npm run test:mcp",
     "test:renderer": "node --test packages/renderer/tests/*.test.mjs",
     "test:source": "node --test packages/source-diagrams/tests/*.test.mjs",
     "test:mcp": "node --test packages/mcp/tests/*.test.mjs",
@@ -56,7 +58,9 @@
     "package:zip": "node ./scripts/package-zip.mjs",
     "package:npm:dry-run": "npm pack --dry-run",
     "container:build": "docker build -f containers/Containerfile -t vaults-diagram-tools:local .",
-    "podman:build": "podman build -f containers/Containerfile -t vaults-diagram-tools:local ."
+    "podman:build": "podman build -f containers/Containerfile -t vaults-diagram-tools:local .",
+    "license:generate": "node scripts/check-license-notices.mjs",
+    "license:check": "node scripts/check-license-notices.mjs --check"
   },
   "dependencies": {
     "@iconify-json/fa": "1.2.2",

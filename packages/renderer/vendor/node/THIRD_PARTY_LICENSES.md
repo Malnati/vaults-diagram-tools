@@ -1,6 +1,6 @@
 # packages/renderer vendor licenses
 
-Vendored dependencies for offline Node-only Mermaid rendering.
+Vendored dependencies for offline Node-only Mermaid rendering. Preserve upstream license files in this vendor tree and the root `THIRD_PARTY_NOTICES.md` in release artifacts.
 
 - @iconify-json/fa@1.2.2: OFL-1.1
 - @iconify-json/logos@1.2.11: CC0-1.0
@@ -23,7 +23,7 @@ Vendored dependencies for offline Node-only Mermaid rendering.
 - character-entities-html4@2.1.0: MIT
 - character-entities-legacy@3.0.0: MIT
 - comma-separated-tokens@2.0.3: MIT
-- dejavu-fonts-ttf@2.37.3: SEE LICENSE IN README.md AND LICENSE
+- dejavu-fonts-ttf@2.37.3: DejaVu Fonts License + package README public-domain dedication
 - dequal@2.0.3: MIT
 - devlop@1.1.0: MIT
 - elkjs@0.11.1: EPL-2.0

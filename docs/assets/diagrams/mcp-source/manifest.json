@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-05-04T04:05:25.414Z",
+  "tool": "vaults-source-diagrams",
+  "sourceDir": "/Users/mal/GitHub/malnati/vaults-diagram-tools/packages/mcp",
+  "outputDir": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source",
+  "adapterMode": "auto",
+  "renderMode": "canonical",
+  "languages": [
+    "javascript"
+  ],
+  "diagrams": [
+    "dependency"
+  ],
+  "maxNodes": 120,
+  "excludes": [
+    ".git",
+    ".svn",
+    ".hg",
+    "node_modules",
+    "vendor",
+    "dist",
+    "build",
+    "target",
+    "out",
+    ".next",
+    ".nuxt",
+    "coverage",
+    "__pycache__"
+  ],
+  "renderer": "/Users/mal/GitHub/malnati/vaults-diagram-tools/packages/renderer/render-mermaid-assets.mjs",
+  "render": {
+    "status": "ok",
+    "manifest": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/render-manifest.json",
+    "renderer": "/Users/mal/GitHub/malnati/vaults-diagram-tools/packages/renderer/render-mermaid-assets.mjs",
+    "error": null
+  },
+  "index": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/INDEX.md",
+  "selection": null,
+  "summary": {
+    "sourceFiles": 3,
+    "generated": 1,
+    "ok": 1,
+    "failed": 0,
+    "status": "ok"
+  },
+  "runs": [
+    {
+      "language": "javascript",
+      "diagram": "dependency",
+      "adapter": "javascript-heuristic-dependency",
+      "confidence": "heuristic",
+      "command": null,
+      "status": "ok",
+      "error": null,
+      "sourceCount": 3,
+      "nodes": 3,
+      "edges": 2,
+      "selection": null,
+      "outputs": {
+        "mmd": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/javascript/dependency.mmd",
+        "svg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/javascript/dependency.svg",
+        "jpg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/javascript/dependency.jpg"
+      }
+    }
+  ]
+}
