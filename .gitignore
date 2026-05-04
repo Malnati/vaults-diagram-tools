@@ -9,3 +9,4 @@ packages/renderer/vendor/node/node_modules/
 packages/renderer/tests/output/
 packaging/vscode/node_modules/
 test/
+.playwright-mcp/

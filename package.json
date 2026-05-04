@@ -1,6 +1,6 @@
 {
   "name": "vaults-diagram-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline assets, and MCP workflows.",
   "type": "module",
   "license": "MIT",
