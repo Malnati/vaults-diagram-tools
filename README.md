@@ -21,6 +21,15 @@ Content-management workflows outside diagram generation are not part of this pac
 
 ## Install
 
+### npm package
+
+```bash
+npm install vaults-diagram-tools
+npx vaults-mermaid-render path/to/diagram.mmd --output-dir out
+npx vaults-source-diagrams --source-dir src --output-dir diagrams
+npx vaults-diagram-mcp
+```
+
 ### npm package from GitHub
 
 ```bash
@@ -47,10 +56,20 @@ Release images are published to GitHub Container Registry as `ghcr.io/malnati/va
 
 ## Command line usage
 
+After installing from npm, run the public CLIs directly from `node_modules/.bin`, `npm exec`, or `npx`:
+
 ```bash
 vaults-mermaid-render path/to/diagram.mmd --output-dir out --png --ascii --manifest out/manifest.json
 vaults-source-diagrams --source-dir src --output-dir diagrams --langs auto --diagrams dependency,class
 vaults-diagram-mcp
+```
+
+One-shot npm examples:
+
+```bash
+npx vaults-mermaid-render examples/simple/flowchart.mmd --output-dir tmp/vaults-diagram-tools
+npx vaults-source-diagrams --source-dir packages/source-diagrams/tests/fixtures/js-project --output-dir tmp/source-diagrams --render-mode placeholder
+npx vaults-diagram-mcp
 ```
 
 Local checkout equivalents:
@@ -104,7 +123,7 @@ The default renderer is the Node/JS/WASM vendor path and does not require Chromi
 
 Working in v1:
 
-- npm package metadata and GitHub install flow
+- npm package publication and GitHub install flow
 - Docker/Podman image
 - MCP server
 - zip release
@@ -115,7 +134,7 @@ Templates in v1:
 - Homebrew formula
 - deb/rpm through nfpm
 - VS Code extension shell
-- CDN facade through npm/jsDelivr/unpkg once npm publication is enabled
+- CDN facade through npm/jsDelivr/unpkg
 
 ## Documentation
 
