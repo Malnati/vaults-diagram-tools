@@ -10,7 +10,8 @@
 Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline assets, and MCP workflows.
 
 - [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
-- [GitHub release v0.1.0](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.0)
+- [GitHub release v0.1.1](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.1)
+- [GitHub App](https://github.com/apps/vaults-diagram-tools)
 - [npm package](https://www.npmjs.com/package/vaults-diagram-tools)
 
 ## What is included
@@ -42,10 +43,10 @@ npm install github:malnati/vaults-diagram-tools
 
 ### GitHub release assets
 
-Release `v0.1.0` publishes the npm tarball, zip artifact, and container image:
+Release `v0.1.1` publishes the npm tarball, zip artifact, and container image:
 
-- [vaults-diagram-tools-0.1.0.tgz](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.tgz)
-- [vaults-diagram-tools-0.1.0.zip](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.zip)
+- [vaults-diagram-tools-0.1.1.tgz](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz)
+- [vaults-diagram-tools-0.1.1.zip](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip)
 - `ghcr.io/malnati/vaults-diagram-tools`
 
 ### Local checkout
@@ -131,6 +132,17 @@ The renderer can run from normal npm dependencies during development, or from `p
 
 The default renderer is the Node/JS/WASM vendor path and does not require Chromium, Puppeteer, `mmdc`, ImageMagick, or `npx`. The legacy shell wrapper only uses `mmdc` when explicitly requested with `MMDC_RENDER_ENGINE=mmdc`; automatic fallback to Puppeteer is disabled.
 
+## GitHub App
+
+The public [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools) GitHub App is the installable read-only app surface for this package.
+
+- Install URL: <https://github.com/apps/vaults-diagram-tools/installations/new>
+- Purpose: read-only installs for validating tags, release assets, and package metadata around this repository.
+- Permissions: repository contents read-only, plus GitHub metadata access.
+- Webhooks: disabled; this release does not run a webhook backend.
+- Marketplace: not listed in GitHub Marketplace in v0.1.1.
+- Secrets: no private key, client secret, or webhook secret is stored in this repository.
+
 ## Distribution status
 
 Working in v1:
@@ -140,6 +152,7 @@ Working in v1:
 - MCP server
 - zip release
 - GitHub Actions CI, release, CodeQL, and Pages workflows
+- Public read-only GitHub App install surface
 - Homebrewery package page with searchable tags
 
 Templates in v1:
@@ -151,22 +164,24 @@ Templates in v1:
 
 ## Current release
 
-`v0.1.0` is the first public standalone release of `vaults-diagram-tools`.
+`v0.1.1` is the current public standalone release of `vaults-diagram-tools`.
 
 | Channel | Status |
 | --- | --- |
-| GitHub Release | [`v0.1.0`](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.0) |
-| Release assets | [`vaults-diagram-tools-0.1.0.tgz`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.tgz) and [`vaults-diagram-tools-0.1.0.zip`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.0/vaults-diagram-tools-0.1.0.zip) |
-| npm | [`vaults-diagram-tools@0.1.0`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.0) |
+| GitHub Release | [`v0.1.1`](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.1) |
+| Release assets | [`vaults-diagram-tools-0.1.1.tgz`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz) and [`vaults-diagram-tools-0.1.1.zip`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip) |
+| npm | [`vaults-diagram-tools@0.1.1`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.1) |
 | Container | [`ghcr.io/malnati/vaults-diagram-tools`](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools) |
 | Automation | [CI](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/ci.yml), [CodeQL](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/codeql.yml), [Pages](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/pages.yml), and [Release](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/release.yml) workflows are published through GitHub Actions. |
+| GitHub App | [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools) public read-only app; [install](https://github.com/apps/vaults-diagram-tools/installations/new). |
 | Documentation | [GitHub Pages](https://malnati.github.io/vaults-diagram-tools/) publishes the `docs/` site. |
 
 ## Documentation
 
 - [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 - [GitHub Pages documentation](https://malnati.github.io/vaults-diagram-tools/)
-- [GitHub release v0.1.0](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.0)
+- [GitHub release v0.1.1](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.1)
+- [GitHub App](https://github.com/apps/vaults-diagram-tools)
 - [Vaults compatibility notes](docs/vaults-compatibility.md)
 - [Contributing guide](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)

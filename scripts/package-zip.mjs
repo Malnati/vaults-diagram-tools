@@ -20,6 +20,7 @@ const result = spawnSync("zip", [
   "node_modules/*",
   "dist/*",
   "tmp/*",
+  ".playwright-mcp/*",
   "*.tgz",
   "*.zip",
   "packages/renderer/tests/output/*",

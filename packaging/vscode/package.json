@@ -2,7 +2,7 @@
   "name": "vaults-diagram-tools-vscode",
   "displayName": "Vaults Diagram Tools",
   "description": "VS Code shell integration for vaults-diagram-tools CLIs.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "malnati",
   "engines": {
     "vscode": "^1.90.0"
