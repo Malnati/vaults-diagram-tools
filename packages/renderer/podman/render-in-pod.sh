@@ -12,7 +12,7 @@ usage() {
   cat <<'USAGE'
 Usage: render-in-pod.sh --input DIR --output DIR [--image NAME[:TAG]] [--pod-name NAME] [--keep-pod] -- [renderer args]
 
-Exemplo:
+Example:
   tools/mermaid/podman/render-in-pod.sh \
     --input /host/input \
     --output /host/output \

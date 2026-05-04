@@ -42,7 +42,7 @@ Options:
   --border-padding N        Inner box padding. Default: ${DEFAULTS.borderPadding}.
   --coords                  Generate a coordinate debug file when possible.
   --coords-output FILE      Debug path. Default: <output without extension>.coords.txt.
-  -h, --help                Mostra esta ajuda.
+  -h, --help                Show this help.
 
 Environment variables:
   MERMAID_ASCII_BIN         Explicit path to the mermaid-ascii binary.

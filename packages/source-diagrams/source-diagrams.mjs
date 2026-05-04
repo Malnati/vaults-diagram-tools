@@ -86,9 +86,9 @@ Options:
   --render-mode MODE       canonical | placeholder. Default: canonical.
   --no-render              Generate only .mmd and manifest files; do not call vaults-mermaid-render.
   --no-index               Do not generate INDEX.md.
-  -h, --help               Mostra esta ajuda.
+  -h, --help               Show this help.
 
-Exemplo:
+Example:
   node tools/source-diagrams/source-diagrams.mjs \\
     --source-dir /repo/src \\
     --output-dir /tmp/source-diagrams \\
