@@ -7,28 +7,84 @@
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://malnati.github.io/vaults-diagram-tools/)
 [![Container](https://img.shields.io/badge/container-ghcr.io%2Fmalnati%2Fvaults--diagram--tools-blue)](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools)
 
-Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline assets, and MCP workflows.
+Mermaid to assets. Source code to maps. MCP for agents.
 
-- [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
+`vaults-diagram-tools` is a standalone toolkit for teams that need reproducible Mermaid SVG/JPEG assets, source-code diagrams, and agent-friendly diagram workflows without carrying Vault-specific content.
+
+- [GitHub Pages documentation](https://malnati.github.io/vaults-diagram-tools/)
+- [npm package `vaults-diagram-tools@0.1.3`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3)
+- [MCP Registry `io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
+- [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.1](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.1)
 - [GitHub App](https://github.com/apps/vaults-diagram-tools)
-- [npm package](https://www.npmjs.com/package/vaults-diagram-tools)
+- [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 
 ## What is included
 
 - Mermaid renderer extracted from the Vaults toolchain.
 - Source-code to Mermaid diagram generator.
-- MCP stdio server with three explicit tools.
+- MCP stdio server with three explicit tools, published in MCP Registry as `io.github.Malnati/vaults-diagram-tools`.
 - Offline-capable release assets for zip and container distribution.
 - Packaging templates for Homebrew, deb/rpm, VS Code, CDN, Docker, and Podman.
 
 Content-management workflows outside diagram generation are not part of this package.
 
-## Download / Install
+## Quick start
+
+Install in a project:
+
+```bash
+npm install -D vaults-diagram-tools
+```
+
+Render one Mermaid source to durable assets:
+
+```bash
+npx vaults-mermaid-render path/to/diagram.mmd --output-dir out --manifest out/manifest.json
+```
+
+Generate Mermaid diagrams from source code:
+
+```bash
+npx vaults-source-diagrams --source-dir src --output-dir diagrams
+```
+
+Run the MCP stdio server:
+
+```bash
+npx vaults-diagram-mcp
+```
+
+Use one-shot `npx` when the project should not keep a dependency:
+
+```bash
+npx --yes --package vaults-diagram-tools vaults-mermaid-render path/to/diagram.mmd --output-dir out
+npx --yes --package vaults-diagram-tools vaults-source-diagrams --source-dir src --output-dir diagrams
+npx --yes --package vaults-diagram-tools vaults-diagram-mcp
+```
+
+## Core tools
+
+| Command | Purpose |
+| --- | --- |
+| `vaults-mermaid-render` | Render `.mmd` or `.mermaid` files to SVG/JPEG, manifests, and optional PNG/text sidecars. |
+| `vaults-source-diagrams` | Generate Mermaid diagrams from source-code structure, including focused selections and traceability metadata. |
+| `vaults-diagram-mcp` | Expose `render_mermaid_text`, `render_mermaid_file`, and `generate_source_diagrams` through MCP stdio. |
+
+Additional package binaries are compatibility entrypoints for older Vaults paths, optional text renderers, and Podman workflows.
+
+## Workflows
+
+- **Markdown docs:** keep the Mermaid source as a linked `.mmd`, render `.svg` and `.jpg`, and show source inline with a fenced `mermaid` block.
+- **Source graph reviews:** generate diagrams from real source paths and inspect manifest selection data for requested files, omitted connectors, and rendered outputs.
+- **Agent automation:** use the MCP server when clients need diagram rendering through a narrow, explicit tool surface. Current registry entry is active at version `0.1.3`, and the Smithery server page is already published.
+- **Release packaging:** ship npm, zip, container, and offline vendor artifacts while preserving license and notice files.
+
+## Download and distribution
 
 ### npm registry
 
-Use the published package when you want the normal Node.js toolchain installation:
+Use the published npm package when you want the normal Node.js toolchain installation. Current npm latest is [`vaults-diagram-tools@0.1.3`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3):
 
 ```bash
 npm install -D vaults-diagram-tools
@@ -58,10 +114,10 @@ npx vaults-mermaid-render path/to/diagram.mmd --output-dir out
 
 ### GitHub release assets
 
-Release `v0.1.1` publishes the npm tarball, zip artifact, and container image:
+The latest GitHub Release and GHCR image remain `v0.1.1`; npm and MCP Registry metadata have advanced to `0.1.3`:
 
-- [vaults-diagram-tools-0.1.1.tgz](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz)
-- [vaults-diagram-tools-0.1.1.zip](https://github.com/malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip)
+- [vaults-diagram-tools-0.1.1.tgz](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz)
+- [vaults-diagram-tools-0.1.1.zip](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip)
 - `ghcr.io/malnati/vaults-diagram-tools:v0.1.1`
 
 ### Local checkout
@@ -133,8 +189,6 @@ node packages/renderer/render-mermaid-assets.mjs examples/simple/flowchart.mmd -
 node packages/source-diagrams/source-diagrams.mjs --source-dir packages/mcp --output-dir tmp/source-diagrams
 node packages/mcp/server.mjs
 ```
-
-Supported public CLIs are `vaults-mermaid-render`, `vaults-source-diagrams`, and `vaults-diagram-mcp`. Additional package binaries are compatibility entrypoints for older Vaults paths, optional text renderers, and Podman workflows.
 
 ## MCP tools
 
@@ -215,23 +269,34 @@ flowchart TB
 #### MCP package source graph
 - Links: [Generated index](docs/assets/diagrams/mcp-source/INDEX.md) / [Mermaid source](docs/assets/diagrams/mcp-source/javascript/dependency.mmd) / [SVG](docs/assets/diagrams/mcp-source/javascript/dependency.svg) / [JPEG](docs/assets/diagrams/mcp-source/javascript/dependency.jpg)
 
-## Markdown diagram policy
+```mermaid
+flowchart LR
+  N1["server.mjs"]
+  N2["tests/mcp-tools.test.mjs"]
+  N3["tools.mjs"]
+  N1 --> N3
+  N2 --> N3
+```
+
+## Compliance and artifact policy
+
+### Markdown diagram policy
 
 Generated Markdown should link artifacts and show source in a `mermaid` fenced block:
 
 ````markdown
 #### Diagram title
-- Links: [Mermaid source](assets/diagram.mmd) / [SVG](assets/diagram.svg) / [JPEG](assets/diagram.jpg)
+- Links: [Mermaid source](docs/assets/diagrams/install-usage-flow.mmd) / [SVG](docs/assets/diagrams/install-usage-flow.svg) / [JPEG](docs/assets/diagrams/install-usage-flow.jpg)
 
 ```mermaid
 flowchart TD
-  A --> B
+  A["Source"] --> B["Rendered assets"]
 ```
 ````
 
 SVG and JPEG files are delivery artifacts. Markdown should link them instead of embedding them as images by default.
 
-## Credits and license compliance
+### Credits and license compliance
 
 - Project license: [MIT](LICENSE).
 - Project notices: [NOTICE.md](NOTICE.md).
@@ -262,7 +327,7 @@ The public [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools
 - Purpose: read-only installs for validating tags, release assets, and package metadata around this repository.
 - Permissions: repository contents read-only, plus GitHub metadata access.
 - Webhooks: disabled; this release does not run a webhook backend.
-- Marketplace: not listed in GitHub Marketplace in v0.1.1.
+- Marketplace: not listed in GitHub Marketplace for the current package line.
 - Secrets: no private key, client secret, or webhook secret is stored in this repository.
 
 ## Distribution status
@@ -272,6 +337,8 @@ Working in v1:
 - npm package publication and GitHub install flow
 - Docker/Podman image
 - MCP server
+- MCP Registry entry `io.github.Malnati/vaults-diagram-tools` active at version `0.1.3`
+- Smithery server page for `ricardomalnati/vaults-diagram-tools`
 - zip release
 - GitHub Actions CI, release, CodeQL, and Pages workflows
 - Public read-only GitHub App install surface
@@ -286,13 +353,16 @@ Templates in v1:
 
 ## Current release
 
-`v0.1.1` is the current public standalone release of `vaults-diagram-tools`.
+`vaults-diagram-tools` is published as npm `0.1.3` and MCP Registry server `io.github.Malnati/vaults-diagram-tools` version `0.1.3`. The latest GitHub Release and GHCR image remain `v0.1.1`.
 
 | Channel | Status |
 | --- | --- |
 | GitHub Release | [`v0.1.1`](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.1) |
 | Release assets | [`vaults-diagram-tools-0.1.1.tgz`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.tgz) and [`vaults-diagram-tools-0.1.1.zip`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.1/vaults-diagram-tools-0.1.1.zip) |
-| npm | [`vaults-diagram-tools@0.1.1`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.1) |
+| npm | [`vaults-diagram-tools@0.1.3`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3), dist-tag `latest` |
+| MCP Registry | [`io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools), status `active`, version `0.1.3` |
+| Smithery | [`ricardomalnati/vaults-diagram-tools`](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools) is published |
+| Registry PR | [PR #17](https://github.com/Malnati/vaults-diagram-tools/pull/17) aligned the MCP Registry publisher name and was merged. |
 | Container | [`ghcr.io/malnati/vaults-diagram-tools:v0.1.1`](https://github.com/malnati/vaults-diagram-tools/pkgs/container/vaults-diagram-tools) |
 | Automation | [CI](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/ci.yml), [CodeQL](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/codeql.yml), [Pages](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/pages.yml), and [Release](https://github.com/Malnati/vaults-diagram-tools/actions/workflows/release.yml) workflows are published through GitHub Actions. |
 | GitHub App | [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools) public read-only app; [install](https://github.com/apps/vaults-diagram-tools/installations/new). |
@@ -300,10 +370,14 @@ Templates in v1:
 
 ## Documentation
 
-- [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 - [GitHub Pages documentation](https://malnati.github.io/vaults-diagram-tools/)
+- [Markdown source for the landing page](docs/index.md)
+- [Vaults compatibility notes](docs/vaults-compatibility.md)
+- [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
+- [npm package `vaults-diagram-tools@0.1.3`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.3)
+- [MCP Registry entry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
+- [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.1](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.1)
 - [GitHub App](https://github.com/apps/vaults-diagram-tools)
-- [Vaults compatibility notes](docs/vaults-compatibility.md)
 - [Contributing guide](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
