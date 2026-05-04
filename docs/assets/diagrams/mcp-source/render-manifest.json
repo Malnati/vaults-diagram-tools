@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-05-04T04:05:25.157Z",
+  "renderer": "vaults-mermaid-render",
+  "mode": "node-js-wasm",
+  "cwd": "/Users/mal/GitHub/malnati/vaults-diagram-tools",
+  "vendorNodeRoot": "/Users/mal/GitHub/malnati/vaults-diagram-tools/packages/renderer/vendor/node",
+  "runtimeMode": null,
+  "outputDir": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source",
+  "inputRoot": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source",
+  "flatOutput": false,
+  "png": false,
+  "ascii": false,
+  "asciiMode": "unicode",
+  "asciiOutput": null,
+  "asciiCoords": false,
+  "rasterScale": 2,
+  "summary": {
+    "total": 1,
+    "ok": 1,
+    "failed": 0
+  },
+  "files": [
+    {
+      "input": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/javascript/dependency.mmd",
+      "diagramType": "flowchart",
+      "status": "ok",
+      "outputs": {
+        "svg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/javascript/dependency.svg",
+        "jpg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/mcp-source/javascript/dependency.jpg"
+      },
+      "error": null
+    }
+  ]
+}

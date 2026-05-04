@@ -1,0 +1,22 @@
+flowchart TB
+  User["User or agent"] --> Markdown["Markdown docs"]
+  User --> Cli["CLI workflow"]
+  User --> McpClient["MCP client"]
+
+  Cli --> Renderer["vaults-mermaid-render"]
+  Cli --> SourceDiagrams["vaults-source-diagrams"]
+  McpClient --> McpServer["vaults-diagram-mcp"]
+  McpServer --> Renderer
+  McpServer --> SourceDiagrams
+
+  SourceDiagrams --> SourceTree["Source tree"]
+  SourceDiagrams --> GeneratedMmd["Generated .mmd"]
+  GeneratedMmd --> Renderer
+
+  Renderer --> Svg[".svg"]
+  Renderer --> Jpeg[".jpg"]
+  Renderer --> Manifest["manifest.json"]
+
+  Svg --> Markdown
+  Jpeg --> Markdown
+  GeneratedMmd --> Markdown

@@ -7,6 +7,9 @@ import { fileURLToPath } from "node:url";
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const TOOLS_DIR = path.resolve(SCRIPT_DIR, "..");
 const VENDOR_ROOT = path.resolve(process.env.MMDC_VENDOR_NODE_ROOT || path.join(TOOLS_DIR, "vendor", "node"));
+const LICENSE_DISPLAY = new Map([
+  ["SEE LICENSE IN README.md AND LICENSE", "DejaVu Fonts License + package README public-domain dedication"],
+]);
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
@@ -37,7 +40,7 @@ function collectPackages(lock) {
     .map(([pkgPath, meta]) => ({
       name: pkgPath.replace(/^node_modules\//, ""),
       version: meta.version || "",
-      license: meta.license || "",
+      license: LICENSE_DISPLAY.get(meta.license || "") || meta.license || "",
       resolved: meta.resolved || "",
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -62,7 +65,7 @@ function main() {
   };
   fs.writeFileSync(path.join(VENDOR_ROOT, "vendor-manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 
-  let licenses = "# packages/renderer vendor licenses\n\nVendored dependencies for offline Node-only Mermaid rendering.\n\n";
+  let licenses = "# packages/renderer vendor licenses\n\nVendored dependencies for offline Node-only Mermaid rendering. Preserve upstream license files in this vendor tree and the root `THIRD_PARTY_NOTICES.md` in release artifacts.\n\n";
   for (const dep of packages) {
     licenses += `- ${dep.name}@${dep.version}: ${dep.license || "UNKNOWN"}\n`;
   }

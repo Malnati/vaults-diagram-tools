@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-04T04:05:24.383Z",
+  "renderer": "vaults-mermaid-render",
+  "mode": "node-js-wasm",
+  "cwd": "/Users/mal/GitHub/malnati/vaults-diagram-tools",
+  "vendorNodeRoot": "/Users/mal/GitHub/malnati/vaults-diagram-tools/packages/renderer/vendor/node",
+  "runtimeMode": null,
+  "outputDir": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams",
+  "inputRoot": null,
+  "flatOutput": false,
+  "png": false,
+  "ascii": false,
+  "asciiMode": "unicode",
+  "asciiOutput": null,
+  "asciiCoords": false,
+  "rasterScale": 2,
+  "summary": {
+    "total": 2,
+    "ok": 2,
+    "failed": 0
+  },
+  "files": [
+    {
+      "input": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/install-usage-flow.mmd",
+      "diagramType": "flowchart",
+      "status": "ok",
+      "outputs": {
+        "svg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/install-usage-flow.svg",
+        "jpg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/install-usage-flow.jpg"
+      },
+      "error": null
+    },
+    {
+      "input": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/tooling-architecture.mmd",
+      "diagramType": "flowchart",
+      "status": "ok",
+      "outputs": {
+        "svg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/tooling-architecture.svg",
+        "jpg": "/Users/mal/GitHub/malnati/vaults-diagram-tools/docs/assets/diagrams/tooling-architecture.jpg"
+      },
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480.6722833333333 687.1999999999999" width="480.6722833333333" height="687.1999999999999" style="--bg:#282a36;--fg:#f8f8f2;--line:#6272a4;--accent:#bd93f9;--muted:#6272a4;background:var(--bg)">
+<style>
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<polyline class="edge" data-from="User" data-to="Markdown" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="148.19261666666665,76.9 148.19261666666665,88.9 226.40261666666666,88.9 226.40261666666666,610.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="User" data-to="Cli" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="148.19261666666665,76.9 148.19261666666665,88.9 154.69261666666668,88.9 154.69261666666668,185.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="User" data-to="McpClient" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="148.19261666666665,76.9 148.19261666666665,88.9 319.12011666666666,88.9 319.12011666666666,100.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Cli" data-to="Renderer" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="154.69261666666668,222.70000000000002 154.69261666666668,246.70000000000005 248.9957833333333,246.70000000000005 248.9957833333333,440.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Cli" data-to="SourceDiagrams" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="154.69261666666668,222.70000000000002 154.69261666666668,246.70000000000005 262.65278333333333,246.70000000000005 262.65278333333333,270.70000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="McpClient" data-to="McpServer" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="319.12011666666666,137.8 319.12011666666666,185.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="McpServer" data-to="Renderer" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="319.12011666666666,222.70000000000002 319.12011666666666,246.70000000000005 248.9957833333333,246.70000000000005 248.9957833333333,440.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="McpServer" data-to="SourceDiagrams" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="319.12011666666666,222.70000000000002 319.12011666666666,246.70000000000005 262.65278333333333,246.70000000000005 262.65278333333333,270.70000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="SourceDiagrams" data-to="SourceTree" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="262.65278333333333,307.6 262.65278333333333,331.6 190.29936666666669,331.6 190.29936666666669,355.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="SourceDiagrams" data-to="GeneratedMmd" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="262.65278333333333,307.6 262.65278333333333,331.6 341.75936666666666,331.6 341.75936666666666,355.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="GeneratedMmd" data-to="Renderer" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="341.75936666666666,392.5 341.75936666666666,416.5 248.9957833333333,416.5 248.9957833333333,440.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Renderer" data-to="Svg" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="248.9957833333333,477.4 248.9957833333333,501.4 140.75811666666664,501.4 140.75811666666664,525.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Renderer" data-to="Jpeg" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="248.9957833333333,477.4 248.9957833333333,501.4 233.67911666666663,501.4 233.67911666666663,525.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Renderer" data-to="Manifest" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="248.9957833333333,477.4 248.9957833333333,501.4 351.79411666666664,501.4 351.79411666666664,525.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Svg" data-to="Markdown" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="140.75811666666664,562.3 140.75811666666664,586.3 226.40261666666666,586.3 226.40261666666666,610.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Jpeg" data-to="Markdown" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="233.67911666666663,562.3 233.67911666666663,586.3 226.40261666666666,586.3 226.40261666666666,610.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="GeneratedMmd" data-to="Markdown" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="341.75936666666666,392.5 341.75936666666666,416.5 226.40261666666666,416.5 226.40261666666666,610.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="node" data-id="User" data-label="User or agent" data-shape="rectangle">
+  <rect x="87.20361666666668" y="40" width="121.97799999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="148.19261666666665" y="58.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">User or agent</text>
+</g>
+<g class="node" data-id="Markdown" data-label="Markdown docs" data-shape="rectangle">
+  <rect x="158.00361666666666" y="610.3" width="136.798" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="226.40261666666666" y="628.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Markdown docs</text>
+</g>
+<g class="node" data-id="Cli" data-label="CLI workflow" data-shape="rectangle">
+  <rect x="96.29711666666668" y="185.8" width="116.79099999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="154.69261666666668" y="204.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">CLI workflow</text>
+</g>
+<g class="node" data-id="McpClient" data-label="MCP client" data-shape="rectangle">
+  <rect x="267.0231166666667" y="100.9" width="104.194" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="319.12011666666666" y="119.35000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">MCP client</text>
+</g>
+<g class="node" data-id="Renderer" data-label="vaults-mermaid-render" data-shape="rectangle">
+  <rect x="161.3307833333333" y="440.5" width="175.33" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="248.9957833333333" y="458.95" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">vaults-mermaid-render</text>
+</g>
+<g class="node" data-id="SourceDiagrams" data-label="vaults-source-diagrams" data-shape="rectangle">
+  <rect x="171.28278333333333" y="270.70000000000005" width="182.74" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="262.65278333333333" y="289.15000000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">vaults-source-diagrams</text>
+</g>
+<g class="node" data-id="McpServer" data-label="vaults-diagram-mcp" data-shape="rectangle">
+  <rect x="241.08811666666665" y="185.8" width="156.064" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="319.12011666666666" y="204.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">vaults-diagram-mcp</text>
+</g>
+<g class="node" data-id="SourceTree" data-label="Source tree" data-shape="rectangle">
+  <rect x="134.12686666666667" y="355.6" width="112.345" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="190.29936666666669" y="374.05" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Source tree</text>
+</g>
+<g class="node" data-id="GeneratedMmd" data-label="Generated .mmd" data-shape="rectangle">
+  <rect x="274.4718666666667" y="355.6" width="134.575" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="341.75936666666666" y="374.05" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Generated .mmd</text>
+</g>
+<g class="node" data-id="Svg" data-label=".svg" data-shape="rectangle">
+  <rect x="107.18611666666663" y="525.4" width="67.14399999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="140.75811666666664" y="543.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">.svg</text>
+</g>
+<g class="node" data-id="Jpeg" data-label=".jpg" data-shape="rectangle">
+  <rect x="202.33011666666664" y="525.4" width="62.69799999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="233.67911666666663" y="543.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">.jpg</text>
+</g>
+<g class="node" data-id="Manifest" data-label="manifest.json" data-shape="rectangle">
+  <rect x="293.0281166666666" y="525.4" width="117.53200000000001" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="351.79411666666664" y="543.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">manifest.json</text>
+</g>
+</svg>
