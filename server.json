@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.malnati/vaults-diagram-tools",
+  "title": "Vaults Diagram Tools",
+  "description": "Render Mermaid and source-code diagrams via MCP.",
+  "repository": {
+    "url": "https://github.com/Malnati/vaults-diagram-tools",
+    "source": "github"
+  },
+  "websiteUrl": "https://malnati.github.io/vaults-diagram-tools/",
+  "version": "0.1.2",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "vaults-diagram-tools",
+      "version": "0.1.2",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

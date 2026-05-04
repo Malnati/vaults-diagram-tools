@@ -1,6 +1,6 @@
 # Third-party notices
 
-This project is licensed under MIT. This notice records third-party runtime dependency credits and license identifiers for vaults-diagram-tools@0.1.1.
+This project is licensed under MIT. This notice records third-party runtime dependency credits and license identifiers for vaults-diagram-tools@0.1.2.
 
 Generated from `package-lock.json` and installed package metadata. Refresh with `npm run license:generate`; verify with `npm run license:check`.
 
