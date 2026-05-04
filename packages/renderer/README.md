@@ -21,6 +21,8 @@ For each `.mmd` / `.mermaid`, the renderer writes `.svg` + `.jpg`; `--png` and `
 
 - Development: normal `npm install` dependencies from root `node_modules`.
 - Offline release/container: `npm run vendor:refresh`, then run with `MMDC_VENDOR_ONLY=1` and `MMDC_VENDOR_NODE_ROOT=packages/renderer/vendor/node`.
+- Default CLI/wrapper path: Node/JS/WASM vendor renderer, with no Chromium/Puppeteer dependency.
+- Legacy compatibility: set `MMDC_RENDER_ENGINE=mmdc` explicitly to use an external Mermaid CLI/Puppeteer installation.
 
 ## Features
 

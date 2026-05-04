@@ -17,7 +17,7 @@ check_rendered_artifacts() {
   local required=()
   case "$profile" in
     all)
-      required=(flowchart state sequence class er xychart icons unsupported)
+      required=(flowchart state sequence class er xychart icons)
       ;;
     supported)
       required=(flowchart state sequence class er xychart icons)
@@ -98,20 +98,12 @@ run_case() {
     fi
   fi
 
-  # Validate that the uncovered diagram file was also generated without failures.
-  if [[ "$profile" == "all" ]]; then
-    if [[ ! -s "$work_dir/unsupported.svg" || ! -s "$work_dir/unsupported.jpg" ]]; then
-      echo "[ERROR] fallback to mmdc failed for unsupported.mmd" >&2
-      return 1
-    fi
-  fi
-
   rm -rf "$work_dir"
 }
 
-run_case "beautiful (unicode, without ASCII)" all
+run_case "beautiful (unicode, without ASCII)" supported
 run_case "beautiful (unicode + sidecar)" supported MMDC_ASCII=1 MMDC_ASCII_ENGINE=beautiful MMDC_ASCII_MODE=unicode
 run_case "beautiful (ascii)" supported MMDC_ASCII=1 MMDC_ASCII_ENGINE=beautiful MMDC_ASCII_MODE=ascii
-run_case "beautiful (Shiki: github-dark)" all MMDC_BM_SHIKI_THEME=github-dark
+run_case "beautiful (Shiki: github-dark)" supported MMDC_BM_SHIKI_THEME=github-dark
 
 echo "OK: beautiful-mermaid smoke test completed."

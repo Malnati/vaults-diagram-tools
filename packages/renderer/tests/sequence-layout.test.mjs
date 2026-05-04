@@ -21,10 +21,10 @@ function renderFixture() {
   participant B as API Gateway
   participant C as Backend
   participant D as External Service
-  A->>B: GET /tmf-api/productOfferingQualification/v4<br/>fields=eligibilityUnavailabilityReason,productOfferingQualificationCharacteristic<br/>relatedParty.id=<msisdn>
+  A->>B: GET /api/catalog/search/v1<br/>fields=itemAvailability,itemCharacteristics<br/>relatedEntity.id=<entity-id>
   Note over B,C: Multiline note one<br/>Multiline note two<br/>Multiline note three
   Note over B: Long note about a single participant with HTTP payload and huge parameters to invade neighboring lifelines without margin<br/>second line
-  B->>B: QueryCloudService.checkSubscriberEligibilityByMsisdn<br/>normalizes full payload with validators
+  B->>B: CatalogQueryService.checkEntityEligibility<br/>normalizes full payload with validators
   alt happy path
     B->>C: calls backend<br/>with adapted payload
   else backend error
@@ -125,7 +125,7 @@ function assertNoForeignLifelineInsideBox(svg, box, ownActors, label) {
 test("sequence messages render as left-aligned blocks with margin above connector lines", () => {
   const svg = renderFixture();
   const messages = groupsByClass(svg, "message");
-  const firstMessage = messages.find((group) => group.includes("GET /tmf-api/productOfferingQualification"));
+  const firstMessage = messages.find((group) => group.includes("GET /api/catalog/search"));
   assert.ok(firstMessage, "expected first multiline message");
 
   const labelBg = firstRect(firstMessage, "message-label-bg");
@@ -150,7 +150,7 @@ test("sequence notes reserve multiline height and use near-white yellow note bac
 test("sequence self-message labels reserve horizontal space before neighboring lifelines", () => {
   const svg = renderFixture();
   const messages = groupsByClass(svg, "message");
-  const selfMessage = messages.find((group) => group.includes("QueryCloudService.checkSubscriberEligibilityByMsisdn"));
+  const selfMessage = messages.find((group) => group.includes("CatalogQueryService.checkEntityEligibility"));
   assert.ok(selfMessage, "expected long self-message");
 
   const labelBg = firstRect(selfMessage, "message-label-bg");

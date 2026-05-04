@@ -24,13 +24,9 @@ function isCliEntryPoint() {
 }
 const PACKAGE_ROOT = path.resolve(SCRIPT_DIR, "..", "..");
 const DEFAULT_MERMAID_RENDERER = path.resolve(SCRIPT_DIR, "..", "renderer", "render-mermaid-assets.mjs");
-const DEFAULT_MERMAID_RENDERER_SH = path.resolve(SCRIPT_DIR, "..", "renderer", "render-mermaid-assets.sh");
 const MERMAID_RENDERER = process.env.VAULTS_MERMAID_RENDERER
   ? path.resolve(process.env.VAULTS_MERMAID_RENDERER)
   : DEFAULT_MERMAID_RENDERER;
-const MERMAID_RENDERER_SH = process.env.VAULTS_MERMAID_RENDERER_SH
-  ? path.resolve(process.env.VAULTS_MERMAID_RENDERER_SH)
-  : DEFAULT_MERMAID_RENDERER_SH;
 const DEFAULT_EXCLUDES = [
   ".git",
   ".svn",
@@ -89,9 +85,9 @@ Options:
   -h, --help               Show this help.
 
 Example:
-  node tools/source-diagrams/source-diagrams.mjs \\
-    --source-dir /repo/src \\
-    --output-dir /tmp/source-diagrams \\
+  node packages/source-diagrams/source-diagrams.mjs \\
+    --source-dir src \\
+    --output-dir tmp/source-diagrams \\
     --langs auto \\
     --diagrams dependency,class
 `);
@@ -955,28 +951,11 @@ async function renderOutputs(opts, runs) {
     env: { ...process.env, MMDC_VENDOR_ONLY: process.env.MMDC_VENDOR_ONLY || "1" },
   });
   if (first.status === 0) return { status: "ok", manifest: renderManifest, renderer: MERMAID_RENDERER, error: null };
-
-  const fallback = spawnSync(MERMAID_RENDERER_SH, [opts.outputDir], {
-    cwd: PACKAGE_ROOT,
-    encoding: "utf8",
-    env: { ...process.env, MMDC_VENDOR_ONLY: "0", MMDC_RENDER_ENGINE: process.env.MMDC_RENDER_ENGINE || "mmdc" },
-  });
-  if (fallback.status === 0) {
-    return {
-      status: "ok",
-      manifest: renderManifest,
-      renderer: MERMAID_RENDERER_SH,
-      fallbackFrom: MERMAID_RENDERER,
-      fallbackReason: first.stderr || first.stdout,
-      error: null,
-    };
-  }
   return {
     status: "error",
     manifest: renderManifest,
     renderer: MERMAID_RENDERER,
-    fallbackRenderer: MERMAID_RENDERER_SH,
-    error: [first.stderr || first.stdout, fallback.stderr || fallback.stdout].filter(Boolean).join("\n--- fallback ---\n"),
+    error: first.stderr || first.stdout,
   };
 }
 

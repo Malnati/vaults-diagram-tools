@@ -6,8 +6,8 @@ Headless source-code to Mermaid generator for `vaults-diagram-tools`.
 
 ```bash
 vaults-source-diagrams \
-  --source-dir /path/to/repo/src \
-  --output-dir /tmp/source-diagrams \
+  --source-dir sample-project/src \
+  --output-dir tmp/source-diagrams \
   --langs auto \
   --diagrams dependency,class
 ```
@@ -16,8 +16,8 @@ Direct checkout usage:
 
 ```bash
 node packages/source-diagrams/source-diagrams.mjs \
-  --source-dir /path/to/repo/src \
-  --output-dir /tmp/source-diagrams
+  --source-dir sample-project/src \
+  --output-dir tmp/source-diagrams
 ```
 
 ## Main flags
@@ -26,7 +26,7 @@ node packages/source-diagrams/source-diagrams.mjs \
 --langs auto|python,javascript,typescript,java,cpp
 --diagrams dependency,class,package,call,sequence
 --files browser.ts,index.ts
---files-from /path/list.txt
+--files-from config/source-files.txt
 --max-nodes 120
 --adapter-mode auto|external|heuristic
 --render-mode canonical|placeholder
@@ -36,7 +36,7 @@ node packages/source-diagrams/source-diagrams.mjs \
 ## Render
 
 `--render-mode canonical` delegates to `vaults-mermaid-render` via `packages/renderer/render-mermaid-assets.mjs`.
-Set `VAULTS_MERMAID_RENDERER` or `VAULTS_MERMAID_RENDERER_SH` to override renderer paths.
+Set `VAULTS_MERMAID_RENDERER` to override the renderer path. Canonical render does not fall back to the legacy shell wrapper or `mmdc`.
 
 `--render-mode placeholder` writes simple SVG/JPEG placeholders for fast logic tests only.
 

@@ -1,0 +1,14 @@
+---
+description: Diagramas de código-fonte canônicos com vaults-source-diagrams
+globs:
+  - "packages/source-diagrams/**/*"
+  - "packages/mcp/**/*"
+  - "docs/**/*.md"
+alwaysApply: false
+---
+
+- Use `vaults-source-diagrams` ou `node packages/source-diagrams/source-diagrams.mjs` para gerar diagramas a partir de código-fonte.
+- Para diagramas focados, use `--files` ou `--files-from` e valide `manifest.selection`.
+- Confirme que nós, conectores e labels do `.mmd` batem com imports/relacionamentos reais do código-fonte.
+- Use `--render-mode placeholder` somente para testes lógicos rápidos.
+- Para entrega real, preserve `.mmd`, `.svg`, `.jpg`, `INDEX.md` e manifest quando aplicável.

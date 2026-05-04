@@ -1,14 +1,14 @@
 sequenceDiagram
     autonumber
-    participant U as Assinante
-    participant App as App Casa Conectada
-    participant PING as PING / CIAM
-    participant APG as Apigee
-    participant BFF as BFF Claro
+    participant U as User
+    participant App as Customer App
+    participant IDP as Identity Provider
+    participant GW as API Gateway
+    participant BFF as Service BFF
 
     U->>App: Credentials / OAuth2 flow
-    App->>PING: OAuth2 authorization
-    PING-->>App: Session tokens (ex.: access / id)
-    App->>APG: API HTTPS + token (gateway policies)
-    APG->>BFF: Pedido validado / roteado
-    Note over BFF: Business identity: CPF<br/>and contract context
+    App->>IDP: OAuth2 authorization
+    IDP-->>App: Session tokens (ex.: access / id)
+    App->>GW: API HTTPS + token (gateway policies)
+    GW->>BFF: Validated routed request
+    Note over BFF: Business identity<br/>and account context

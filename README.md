@@ -17,7 +17,7 @@ Portable Mermaid and source-code diagram toolkit for SVG/JPEG rendering, offline
 - Offline-capable release assets for zip and container distribution.
 - Packaging templates for Homebrew, deb/rpm, VS Code, CDN, Docker, and Podman.
 
-Not included: OCR/document conversion, Claro vault audits, CPQ import, clippings, or Casa Conectada PDF tooling.
+Content-management workflows outside diagram generation are not part of this package.
 
 ## Install
 
@@ -56,8 +56,8 @@ vaults-diagram-mcp
 Local checkout equivalents:
 
 ```bash
-node packages/renderer/render-mermaid-assets.mjs examples/simple/flowchart.mmd --output-dir /tmp/vaults-diagram-tools
-node packages/source-diagrams/source-diagrams.mjs --source-dir packages/source-diagrams/tests/fixtures/js-project --output-dir /tmp/source-diagrams
+node packages/renderer/render-mermaid-assets.mjs examples/simple/flowchart.mmd --output-dir tmp/vaults-diagram-tools
+node packages/source-diagrams/source-diagrams.mjs --source-dir packages/source-diagrams/tests/fixtures/js-project --output-dir tmp/source-diagrams
 node packages/mcp/server.mjs
 ```
 
@@ -97,6 +97,8 @@ npm run test:vendor:offline
 ```
 
 The renderer can run from normal npm dependencies during development, or from `packages/renderer/vendor/node` when `MMDC_VENDOR_ONLY=1`.
+
+The default renderer is the Node/JS/WASM vendor path and does not require Chromium, Puppeteer, `mmdc`, ImageMagick, or `npx`. The legacy shell wrapper only uses `mmdc` when explicitly requested with `MMDC_RENDER_ENGINE=mmdc`; automatic fallback to Puppeteer is disabled.
 
 ## Distribution status
 
