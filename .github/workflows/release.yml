@@ -53,7 +53,7 @@ jobs:
       - name: Package VS Code extension
         run: npm run vscode:package
       - name: Upload GitHub release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body: |
             ![vaults-diagram-tools release banner](https://raw.githubusercontent.com/Malnati/vaults-diagram-tools/main/docs/assets/brand/release-banner.png)
