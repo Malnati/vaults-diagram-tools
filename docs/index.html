@@ -477,7 +477,7 @@ npx vaults-diagram-mcp</code></pre>
           <p class="eyebrow">Distribution</p>
           <h2 id="distribution-title">Install where the workflow runs.</h2>
         </div>
-        <p>Use npm 0.1.4 for projects, npx for one-shot automation, VS Code VSIX or Marketplace for editor workflows, MCP Registry or Smithery for discovery, GHCR/release assets for offline handoff, and Quay.io for Podman pulls.</p>
+        <p>Use npm 0.1.4 for projects, npx for one-shot automation, the GitHub Actions Marketplace Action for CI diagram jobs, VS Code VSIX or Marketplace for editor workflows, MCP Registry or Smithery for discovery, GHCR/release assets for offline handoff, and Quay.io for Podman pulls.</p>
       </div>
       <div class="grid two">
         <article class="card">
@@ -501,6 +501,15 @@ podman run --rm \
           <h3>GitHub release</h3>
           <p><a href="https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.4">Release v0.1.4</a> is the latest GitHub release, GHCR artifact line, npm package, MCP Registry metadata, and VS Code VSIX line; Quay.io carries the Podman image at <a href="https://quay.io/repository/ricardomalnati/vaults-diagram-tools"><code>v0.1.0</code></a>.</p>
           <p><a href="https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix">Download the VS Code VSIX</a> and install with <code>code --install-extension vaults-diagram-tools-vscode-0.1.4.vsix</code>.</p>
+        </article>
+        <article class="card">
+          <h3>GitHub Actions Marketplace</h3>
+          <p>Use the <a href="https://github.com/marketplace/actions/vaults-diagram-tools"><code>Vaults Diagram Tools</code></a> Marketplace target for CI render, source-diagram, and Markdown policy jobs. The dedicated action repo is <a href="https://github.com/Malnati/vaults-diagram-tools-action"><code>Malnati/vaults-diagram-tools-action</code></a>.</p>
+          <pre><code>uses: Malnati/vaults-diagram-tools-action@v0
+with:
+  mode: render
+  input: docs/diagrams
+  output-dir: diagram-assets</code></pre>
         </article>
         <article class="card">
           <h3>VS Code extension</h3>
@@ -532,7 +541,7 @@ podman run --rm \
           <li><strong>Markdown policy:</strong> keep Mermaid source linked as <code>.mmd</code>, render <code>.svg</code> and <code>.jpg</code>, and show inline source with <code>mermaid</code> fences.</li>
           <li><strong>Credits:</strong> Dracula palette through <code>beautiful-mermaid</code>; Iconify JSON packages for Font Awesome 4, SVG Logos, and Lucide Icons.</li>
           <li><strong>Validation:</strong> <code>npm test</code> includes license notice checks plus renderer, source-diagram, and MCP tests.</li>
-          <li><strong>Distribution:</strong> npm <code>0.1.4</code>, MCP Registry <code>active</code> at <code>0.1.4</code>, Smithery published, VS Code VSIX and Marketplace targets, GitHub Release/GHCR <code>v0.1.4</code>, Quay.io Podman image <code>v0.1.0</code>.</li>
+          <li><strong>Distribution:</strong> npm <code>0.1.4</code>, dedicated GitHub Actions action repo release <code>v0.1.4</code>/<code>v0</code> with Marketplace target, MCP Registry <code>active</code> at <code>0.1.4</code>, Smithery published, VS Code VSIX and Marketplace targets, GitHub Release/GHCR <code>v0.1.4</code>, Quay.io Podman image <code>v0.1.0</code>.</li>
         </ul>
       </div>
     </section>
