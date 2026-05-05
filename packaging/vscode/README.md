@@ -7,17 +7,27 @@ Desktop VS Code extension for `vaults-diagram-tools`.
 - Render the active `.mmd` or `.mermaid` file to `.svg` and `.jpg` assets.
 - Generate Mermaid source diagrams from a selected source directory.
 - Validate the Vaults Markdown diagram policy for the active Markdown file.
-- Register the bundled `vaults-diagram-tools` MCP stdio server for VS Code Agent Mode.
+- Register the resolved `vaults-diagram-tools` MCP stdio server for VS Code Agent Mode.
+- Update, inspect, or force the bundled fallback runtime from the Command Palette.
 
 ## Runtime
 
-The extension bundles the npm package `vaults-diagram-tools` at the same version as the extension. Commands run the bundled Node entrypoints through the current VS Code extension host runtime. No `npx` or network download is used at command runtime.
+Default runtime mode is `hybrid`:
+
+1. Use a valid managed cache from VS Code global extension storage.
+2. Check `vaults-diagram-tools@latest` at most once per day and refresh that cache when npm is reachable.
+3. Fall back to the bundled offline runtime when the managed cache is missing, stale, or update fails.
+
+Managed updates use local `npm install --ignore-scripts --omit=dev` against the configured npm dist-tag or version. No `npx` is used. The bundled runtime stays available for offline work and does not need to match the VS Code extension version.
 
 ## Commands
 
 - `Vaults Diagram Tools: Render Current Mermaid File`
 - `Vaults Diagram Tools: Generate Source Diagrams`
 - `Vaults Diagram Tools: Validate Markdown Diagram Policy`
+- `Vaults Diagram Tools: Update Runtime Now`
+- `Vaults Diagram Tools: Show Runtime Status`
+- `Vaults Diagram Tools: Use Bundled Runtime`
 
 ## MCP
 
@@ -26,6 +36,17 @@ The extension contributes one MCP server definition provider: `vaultsDiagramTool
 - `render_mermaid_text`
 - `render_mermaid_file`
 - `generate_source_diagrams`
+
+## Manual publication
+
+GitHub Actions validates and packages release artifacts only. Publish external registries from an authenticated local terminal:
+
+```bash
+npm publish --access public
+npm run vscode:package
+npm run vscode:publish:marketplace -- -p <token-local>
+npm run vscode:publish:openvsx -- -p <token-local>
+```
 
 ## Requirements
 

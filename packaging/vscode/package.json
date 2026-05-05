@@ -37,7 +37,10 @@
     "onStartupFinished",
     "onCommand:vaultsDiagramTools.renderCurrentMermaid",
     "onCommand:vaultsDiagramTools.generateSourceDiagrams",
-    "onCommand:vaultsDiagramTools.validateMarkdownDiagramPolicy"
+    "onCommand:vaultsDiagramTools.validateMarkdownDiagramPolicy",
+    "onCommand:vaultsDiagramTools.updateRuntimeNow",
+    "onCommand:vaultsDiagramTools.showRuntimeStatus",
+    "onCommand:vaultsDiagramTools.useBundledRuntime"
   ],
   "galleryBanner": {
     "color": "#0f172a",
@@ -71,6 +74,21 @@
       {
         "command": "vaultsDiagramTools.validateMarkdownDiagramPolicy",
         "title": "Vaults Diagram Tools: Validate Markdown Diagram Policy",
+        "category": "Vaults Diagram Tools"
+      },
+      {
+        "command": "vaultsDiagramTools.updateRuntimeNow",
+        "title": "Vaults Diagram Tools: Update Runtime Now",
+        "category": "Vaults Diagram Tools"
+      },
+      {
+        "command": "vaultsDiagramTools.showRuntimeStatus",
+        "title": "Vaults Diagram Tools: Show Runtime Status",
+        "category": "Vaults Diagram Tools"
+      },
+      {
+        "command": "vaultsDiagramTools.useBundledRuntime",
+        "title": "Vaults Diagram Tools: Use Bundled Runtime",
         "category": "Vaults Diagram Tools"
       }
     ],
@@ -110,6 +128,21 @@
           ],
           "default": "canonical",
           "description": "Render mode passed to vaults-source-diagrams. Use placeholder for fast structural checks."
+        },
+        "vaultsDiagramTools.runtime.mode": {
+          "type": "string",
+          "enum": [
+            "hybrid",
+            "bundled",
+            "managed"
+          ],
+          "default": "hybrid",
+          "description": "Runtime resolution mode. Hybrid uses a cached managed vaults-diagram-tools runtime when available and falls back to the bundled offline runtime."
+        },
+        "vaultsDiagramTools.runtime.channel": {
+          "type": "string",
+          "default": "latest",
+          "description": "npm version or dist-tag used by the managed runtime updater. Default follows vaults-diagram-tools@latest with a daily check."
         }
       }
     }

@@ -8,17 +8,11 @@ on:
 
 permissions:
   contents: write
-  packages: write
-  id-token: write
 
 jobs:
   release:
     name: release
     runs-on: ubuntu-latest
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      VSCE_PAT: ${{ secrets.VSCE_PAT }}
-      OVSX_PAT: ${{ secrets.OVSX_PAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,42 +35,8 @@ jobs:
           mkdir -p dist
           npm pack --pack-destination dist
           npm run package:zip
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract container metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository_owner }}/vaults-diagram-tools
-          tags: |
-            type=ref,event=tag
-            type=raw,value=latest,enable={{is_default_branch}}
-      - name: Build and push container image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: containers/Containerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-      - name: Check npm package publication status
-        id: npm_package
-        run: |
-          version="$(node -p "require('./package.json').version")"
-          if npm view "vaults-diagram-tools@${version}" version; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Publish npm package
-        if: env.NPM_TOKEN != '' && steps.npm_package.outputs.exists != 'true'
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build container image
+        run: docker build -f containers/Containerfile -t vaults-diagram-tools:release .
       - name: Write branded summary
         if: always()
         run: |
@@ -84,35 +44,14 @@ jobs:
             echo '![vaults-diagram-tools Actions banner](https://malnati.github.io/vaults-diagram-tools/assets/brand/actions-banner.png)'
             echo
             echo '### vaults-diagram-tools Release'
-            echo 'Release notes use docs/assets/brand/release-banner.png.'
+            echo 'Release workflow validates and packages artifacts only. External registries are published manually from a local authenticated terminal.'
           } >> "$GITHUB_STEP_SUMMARY"
-      - name: Wait for npm package availability
-        run: |
-          version="$(node -p "require('./package.json').version")"
-          for attempt in $(seq 1 12); do
-            if npm view "vaults-diagram-tools@${version}" version; then
-              exit 0
-            fi
-            echo "npm package vaults-diagram-tools@${version} not visible yet; retry ${attempt}/12"
-            sleep 10
-          done
-          npm view "vaults-diagram-tools@${version}" version
       - name: Install VS Code extension dependencies
         run: npm run vscode:install
       - name: Test VS Code extension
         run: npm run vscode:test
       - name: Package VS Code extension
         run: npm run vscode:package
-      - name: Publish VS Code Marketplace extension
-        if: env.VSCE_PAT != ''
-        run: npm run vscode:publish:marketplace -- -p "$VSCE_PAT"
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
-      - name: Publish Open VSX extension
-        if: env.OVSX_PAT != ''
-        run: npm run vscode:publish:openvsx -- -p "$OVSX_PAT"
-        env:
-          OVSX_PAT: ${{ secrets.OVSX_PAT }}
       - name: Upload GitHub release assets
         uses: softprops/action-gh-release@v2
         with:
@@ -121,7 +60,7 @@ jobs:
 
             Mermaid to assets. Source code to maps. MCP for agents.
 
-            Release artifacts preserve npm package output, zip handoff, GHCR image metadata, VS Code extension VSIX, notices, and the deterministic brand kit.
+            Release artifacts preserve the npm tarball handoff, zip handoff, VS Code extension VSIX, notices, and the deterministic brand kit. npm, VS Code Marketplace, Open VSX, container registries, and MCP Registry publication are manual terminal operations.
           files: |
             dist/*.tgz
             dist/*.zip
@@ -131,7 +70,3 @@ jobs:
           curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
       - name: Validate MCP Registry metadata
         run: ./mcp-publisher validate
-      - name: Authenticate to MCP Registry
-        run: ./mcp-publisher login github-oidc
-      - name: Publish MCP Registry metadata
-        run: ./mcp-publisher publish
