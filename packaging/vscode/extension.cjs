@@ -2,6 +2,10 @@ const fs = require("node:fs");
 const fsp = require("node:fs/promises");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
+const {
+  createRuntimeManager,
+  resolveRuntimePaths,
+} = require("./runtime-manager.cjs");
 
 let vscode;
 try {
@@ -15,16 +19,6 @@ const MCP_PROVIDER_ID = "vaultsDiagramTools";
 const MCP_LABEL = "vaults-diagram-tools";
 const MERMAID_EXTENSIONS = new Set([".mmd", ".mermaid"]);
 const MMD_FENCE_BLOCK = /```mmd\s*\n/i;
-
-function resolveRuntimePaths(extensionPath) {
-  const packageRoot = path.join(extensionPath, "node_modules", "vaults-diagram-tools");
-  return {
-    packageRoot,
-    renderer: path.join(packageRoot, "packages", "renderer", "render-mermaid-assets.mjs"),
-    sourceDiagrams: path.join(packageRoot, "packages", "source-diagrams", "source-diagrams.mjs"),
-    mcpServer: path.join(packageRoot, "packages", "mcp", "server.mjs"),
-  };
-}
 
 function createNodeCliInvocation(scriptPath, args = [], options = {}) {
   return {
@@ -170,11 +164,13 @@ async function commandWithProgress(vscodeApi, title, callback) {
 
 function createCommands(context, vscodeApi, options) {
   const outputChannel = vscodeApi.window.createOutputChannel("Vaults Diagram Tools");
-  const runtime = resolveRuntimePaths(context.extensionPath);
+  const runtimeManager = options.runtimeManager || createRuntimeManager(context, vscodeApi, options);
   const spawnRunner = options.spawnRunner || ((invocation) => runInvocation(invocation, outputChannel));
+  const onRuntimeChanged = options.onRuntimeChanged || (() => undefined);
 
   async function renderCurrentMermaid() {
     return commandWithProgress(vscodeApi, "Rendering Mermaid assets", async () => {
+      const runtime = await runtimeManager.resolveRuntime();
       const editor = activeFileEditor(vscodeApi);
       const sourceFile = editor.document.uri.fsPath;
       const ext = path.extname(sourceFile).toLowerCase();
@@ -200,6 +196,7 @@ function createCommands(context, vscodeApi, options) {
 
   async function generateSourceDiagrams() {
     return commandWithProgress(vscodeApi, "Generating source diagrams", async () => {
+      const runtime = await runtimeManager.resolveRuntime();
       const workspaceFolder = vscodeApi.workspace.workspaceFolders?.[0]?.uri;
       const sourceSelection = await vscodeApi.window.showOpenDialog({
         title: "Select source directory",
@@ -257,16 +254,52 @@ function createCommands(context, vscodeApi, options) {
     });
   }
 
+  async function updateRuntimeNow() {
+    return commandWithProgress(vscodeApi, "Updating Vaults Diagram Tools runtime", async () => {
+      try {
+        const runtime = await runtimeManager.updateManagedRuntime({ force: true });
+        onRuntimeChanged();
+        vscodeApi.window.showInformationMessage(`Updated managed runtime ${runtime.version || ""}.`.trim());
+        return runtime;
+      } catch (error) {
+        const active = await runtimeManager.resolveRuntime({ allowUpdate: false });
+        vscodeApi.window.showWarningMessage(`Could not update managed runtime; using ${active.source || "bundled"} runtime. ${error.message}`);
+        return active;
+      }
+    });
+  }
+
+  async function showRuntimeStatus() {
+    const status = await runtimeManager.status();
+    const active = status.active;
+    const managed = status.managed ? `${status.managed.version || "unknown"} at ${status.managed.packageRoot}` : "not installed";
+    const bundled = `${status.bundled.version || "unknown"} at ${status.bundled.packageRoot}`;
+    const message = `Active runtime: ${active.source || "bundled"} ${active.version || "unknown"}; mode=${status.mode}; channel=${status.channel}; managed=${managed}; bundled=${bundled}`;
+    outputChannel.appendLine(message);
+    vscodeApi.window.showInformationMessage(message);
+    return status;
+  }
+
+  async function useBundledRuntime() {
+    const runtime = await runtimeManager.useBundledRuntime();
+    onRuntimeChanged();
+    vscodeApi.window.showInformationMessage(`Using bundled runtime ${runtime.version || ""}.`.trim());
+    return runtime;
+  }
+
   return {
     outputChannel,
-    runtime,
+    runtimeManager,
     renderCurrentMermaid,
     generateSourceDiagrams,
     validateMarkdownDiagramPolicy,
+    updateRuntimeNow,
+    showRuntimeStatus,
+    useBundledRuntime,
   };
 }
 
-function registerMcpProvider(context, vscodeApi, runtime) {
+function registerMcpProvider(context, vscodeApi, runtimeManager) {
   if (!vscodeApi.lm?.registerMcpServerDefinitionProvider || !vscodeApi.McpStdioServerDefinition) {
     return undefined;
   }
@@ -275,6 +308,7 @@ function registerMcpProvider(context, vscodeApi, runtime) {
   const provider = {
     onDidChangeMcpServerDefinitions: didChangeEmitter.event,
     async provideMcpServerDefinitions() {
+      const runtime = await runtimeManager.resolveRuntime();
       return [
         new vscodeApi.McpStdioServerDefinition({
           label: MCP_LABEL,
@@ -285,7 +319,7 @@ function registerMcpProvider(context, vscodeApi, runtime) {
             ...process.env,
             ELECTRON_RUN_AS_NODE: "1",
           },
-          version: EXTENSION_PACKAGE.version,
+          version: runtime.version || EXTENSION_PACKAGE.version,
         }),
       ];
     },
@@ -296,17 +330,31 @@ function registerMcpProvider(context, vscodeApi, runtime) {
   context.subscriptions.push(didChangeEmitter);
   const disposable = vscodeApi.lm.registerMcpServerDefinitionProvider(MCP_PROVIDER_ID, provider);
   context.subscriptions.push(disposable);
-  return disposable;
+  return {
+    disposable,
+    refresh() {
+      didChangeEmitter.fire();
+    },
+  };
 }
 
 function activate(context, injectedVscode, options = {}) {
   const vscodeApi = requireVscodeApi(injectedVscode || vscode);
-  const commands = createCommands(context, vscodeApi, options);
+  const runtimeManager = options.runtimeManager || createRuntimeManager(context, vscodeApi, options);
+  let mcpRegistration;
+  const commands = createCommands(context, vscodeApi, {
+    ...options,
+    runtimeManager,
+    onRuntimeChanged: () => mcpRegistration?.refresh?.(),
+  });
   context.subscriptions.push(commands.outputChannel);
   context.subscriptions.push(vscodeApi.commands.registerCommand("vaultsDiagramTools.renderCurrentMermaid", commands.renderCurrentMermaid));
   context.subscriptions.push(vscodeApi.commands.registerCommand("vaultsDiagramTools.generateSourceDiagrams", commands.generateSourceDiagrams));
   context.subscriptions.push(vscodeApi.commands.registerCommand("vaultsDiagramTools.validateMarkdownDiagramPolicy", commands.validateMarkdownDiagramPolicy));
-  registerMcpProvider(context, vscodeApi, commands.runtime);
+  context.subscriptions.push(vscodeApi.commands.registerCommand("vaultsDiagramTools.updateRuntimeNow", commands.updateRuntimeNow));
+  context.subscriptions.push(vscodeApi.commands.registerCommand("vaultsDiagramTools.showRuntimeStatus", commands.showRuntimeStatus));
+  context.subscriptions.push(vscodeApi.commands.registerCommand("vaultsDiagramTools.useBundledRuntime", commands.useBundledRuntime));
+  mcpRegistration = registerMcpProvider(context, vscodeApi, runtimeManager);
   return commands;
 }
 
@@ -316,6 +364,7 @@ module.exports = {
   activate,
   deactivate,
   resolveRuntimePaths,
+  createRuntimeManager,
   createNodeCliInvocation,
   checkMarkdownPolicyText,
 };

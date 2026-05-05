@@ -42,7 +42,7 @@
     "server.json"
   ],
   "scripts": {
-    "check": "node --check packages/renderer/render-mermaid-assets.mjs && node --check packages/source-diagrams/source-diagrams.mjs && node --check packages/mcp/server.mjs && node --check packages/mcp/tools.mjs && node --check scripts/generate-brand-assets.mjs && node --check packaging/vscode/extension.cjs",
+    "check": "node --check packages/renderer/render-mermaid-assets.mjs && node --check packages/source-diagrams/source-diagrams.mjs && node --check packages/mcp/server.mjs && node --check packages/mcp/tools.mjs && node --check scripts/generate-brand-assets.mjs && node --check packaging/vscode/extension.cjs && node --check packaging/vscode/runtime-manager.cjs",
     "test": "npm run license:check && npm run check && npm run test:renderer && npm run test:source && npm run test:mcp && npm run test:brand && npm run brand:check && npm run vscode:test",
     "test:renderer": "node --test packages/renderer/tests/*.test.mjs",
     "test:source": "node --test packages/source-diagrams/tests/*.test.mjs",

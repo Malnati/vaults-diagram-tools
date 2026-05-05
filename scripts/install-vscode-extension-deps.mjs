@@ -10,11 +10,8 @@ const rootPkg = JSON.parse(await fsp.readFile(path.join(ROOT, "package.json"), "
 const vscodeDir = path.join(ROOT, "packaging", "vscode");
 const vscodePkg = JSON.parse(await fsp.readFile(path.join(vscodeDir, "package.json"), "utf8"));
 
-if (vscodePkg.version !== rootPkg.version) {
-  throw new Error(`VS Code extension version ${vscodePkg.version} must match root package version ${rootPkg.version}`);
-}
-if (vscodePkg.dependencies?.[rootPkg.name] !== rootPkg.version) {
-  throw new Error(`VS Code extension dependency ${rootPkg.name} must equal ${rootPkg.version}`);
+if (!vscodePkg.dependencies?.[rootPkg.name]) {
+  throw new Error(`VS Code extension dependency ${rootPkg.name} must be declared so the bundled fallback runtime is explicit`);
 }
 
 const distDir = path.join(ROOT, "tmp", "vscode-runtime-pack");
@@ -58,4 +55,4 @@ const installedPkg = JSON.parse(await fsp.readFile(path.join(vscodeDir, "node_mo
 if (installedPkg.version !== rootPkg.version) {
   throw new Error(`Installed ${rootPkg.name}@${installedPkg.version}; expected ${rootPkg.version}`);
 }
-console.log(`OK: installed VS Code extension dependencies with bundled ${rootPkg.name}@${rootPkg.version}`);
+console.log(`OK: installed VS Code extension dependencies with bundled fallback ${rootPkg.name}@${rootPkg.version} for extension ${vscodePkg.version}`);

@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Added hybrid VS Code runtime resolution with a managed `vaults-diagram-tools@latest` cache, bundled offline fallback, runtime status, manual update, and force-bundled commands.
+- Added tests covering managed-cache preference, offline fallback, forced runtime update, npm metadata integrity rejection, and secretless release workflow behavior.
+
+### Changed
+
+- Changed GitHub Actions release behavior to validate and package artifacts without publishing npm, VS Code Marketplace, Open VSX, container registries, or MCP Registry.
+- Decoupled VS Code extension packaging from the root package version; the bundled fallback runtime can lag while the managed runtime follows the configured npm channel.
+
 ## [0.1.4] - 2026-05-04
 
 ### Added
