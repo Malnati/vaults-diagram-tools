@@ -16,6 +16,7 @@ Mermaid to assets. Source code to maps. MCP for agents.
 
 - [GitHub Pages documentation](https://malnati.github.io/vaults-diagram-tools/)
 - [npm package `vaults-diagram-tools@0.1.4`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4)
+- [GitHub Actions Marketplace Action `Vaults Diagram Tools`](https://github.com/marketplace/actions/vaults-diagram-tools) ([repo](https://github.com/Malnati/vaults-diagram-tools-action))
 - [MCP Registry `io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
 - [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.4](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.4)
@@ -30,6 +31,7 @@ Mermaid to assets. Source code to maps. MCP for agents.
 - Source-code to Mermaid diagram generator.
 - MCP stdio server with three explicit tools, published in MCP Registry as `io.github.Malnati/vaults-diagram-tools`.
 - Offline-capable release assets for zip and container distribution.
+- Dedicated GitHub Actions Marketplace wrapper repository for render/source/policy automation.
 - Packaging templates for Homebrew, deb/rpm, CDN, Docker, and Podman, plus a publishable VS Code extension package.
 
 Content-management workflows outside diagram generation are not part of this package.
@@ -107,6 +109,31 @@ npx --yes --package vaults-diagram-tools vaults-mermaid-render path/to/diagram.m
 npx --yes --package vaults-diagram-tools vaults-source-diagrams --source-dir src --output-dir diagrams
 npx --yes --package vaults-diagram-tools vaults-diagram-mcp
 ```
+
+### GitHub Actions Marketplace
+
+Use the dedicated Marketplace action when the diagram workflow should run inside GitHub Actions without adding project-local scripts:
+
+```yaml
+steps:
+  - uses: actions/checkout@v4
+  - name: Render Mermaid assets
+    id: diagrams
+    uses: Malnati/vaults-diagram-tools-action@v0
+    with:
+      mode: render
+      input: docs/diagrams
+      output-dir: diagram-assets
+  - name: Upload diagram assets
+    uses: actions/upload-artifact@v4
+    with:
+      name: diagram-assets
+      path: ${{ steps.diagrams.outputs.output-dir }}
+```
+
+- [GitHub Actions Marketplace listing](https://github.com/marketplace/actions/vaults-diagram-tools)
+- [Action repository](https://github.com/Malnati/vaults-diagram-tools-action)
+- Initial action release: `v0.1.4`; moving compatibility tag: `v0`.
 
 ### npm package from GitHub
 
@@ -388,7 +415,7 @@ The public [`vaults-diagram-tools`](https://github.com/apps/vaults-diagram-tools
 - Purpose: read-only installs for validating tags, release assets, and package metadata around this repository.
 - Permissions: repository contents read-only, plus GitHub metadata access.
 - Webhooks: disabled; this release does not run a webhook backend.
-- Marketplace: not listed in GitHub Marketplace for the current package line.
+- GitHub Actions Marketplace: [`Vaults Diagram Tools`](https://github.com/marketplace/actions/vaults-diagram-tools) is the Marketplace target for the dedicated [`Malnati/vaults-diagram-tools-action`](https://github.com/Malnati/vaults-diagram-tools-action) wrapper repository.
 - Secrets: no private key, client secret, or webhook secret is stored in this repository.
 
 ## Distribution status
@@ -402,6 +429,7 @@ Working in v1:
 - Smithery server page for `ricardomalnati/vaults-diagram-tools`
 - zip release
 - GitHub Actions CI, release, CodeQL, and Pages workflows
+- GitHub Actions Marketplace Action `Vaults Diagram Tools` for render/source/policy automation
 - Public read-only GitHub App install surface
 - Homebrewery package page with searchable tags
 - Publishable VS Code extension package with VS Code Marketplace and Open VSX workflow targets
@@ -421,6 +449,7 @@ Templates in v1:
 | GitHub Release | [`v0.1.4`](https://github.com/Malnati/vaults-diagram-tools/releases/tag/v0.1.4) |
 | Release assets | [`vaults-diagram-tools-0.1.4.tgz`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-0.1.4.tgz), [`vaults-diagram-tools-0.1.4.zip`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-0.1.4.zip), and [`vaults-diagram-tools-vscode-0.1.4.vsix`](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix) |
 | npm | [`vaults-diagram-tools@0.1.4`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4), dist-tag `latest` |
+| GitHub Actions Marketplace | [`Vaults Diagram Tools`](https://github.com/marketplace/actions/vaults-diagram-tools) target, backed by [`Malnati/vaults-diagram-tools-action`](https://github.com/Malnati/vaults-diagram-tools-action) tags `v0.1.4` and `v0` |
 | MCP Registry | [`io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools), status `active`, version `0.1.4` |
 | Smithery | [`ricardomalnati/vaults-diagram-tools`](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools) is published |
 | Registry PR | [PR #17](https://github.com/Malnati/vaults-diagram-tools/pull/17) aligned the MCP Registry publisher name and was merged. |
@@ -438,6 +467,7 @@ Templates in v1:
 - [Vaults compatibility notes](docs/vaults-compatibility.md)
 - [Homebrewery package page](https://homebrewery.naturalcrit.com/share/J1w1-EjqPAr9)
 - [npm package `vaults-diagram-tools@0.1.4`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4)
+- [GitHub Actions Marketplace Action `Vaults Diagram Tools`](https://github.com/marketplace/actions/vaults-diagram-tools) ([repo](https://github.com/Malnati/vaults-diagram-tools-action))
 - [MCP Registry entry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
 - [Smithery server](https://smithery.ai/servers/ricardomalnati/vaults-diagram-tools)
 - [GitHub release v0.1.4](https://github.com/malnati/vaults-diagram-tools/releases/tag/v0.1.4)

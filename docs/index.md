@@ -6,6 +6,7 @@ Portable diagram automation for teams that need reproducible Mermaid assets, sou
 
 - [GitHub repository](https://github.com/malnati/vaults-diagram-tools)
 - [npm package `vaults-diagram-tools@0.1.4`](https://www.npmjs.com/package/vaults-diagram-tools/v/0.1.4)
+- [GitHub Actions Marketplace Action `Vaults Diagram Tools`](https://github.com/marketplace/actions/vaults-diagram-tools)
 - [MCP Registry `io.github.Malnati/vaults-diagram-tools`](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.Malnati%2Fvaults-diagram-tools)
 - [VS Code Marketplace `malnati.vaults-diagram-tools`](https://marketplace.visualstudio.com/items?itemName=malnati.vaults-diagram-tools)
 - [Direct VSIX download](https://github.com/Malnati/vaults-diagram-tools/releases/download/v0.1.4/vaults-diagram-tools-vscode-0.1.4.vsix)
@@ -82,6 +83,24 @@ cd vaults-diagram-tools
 npm ci
 npm test
 ```
+
+### GitHub Actions Marketplace
+
+Use the dedicated action repository when render/source/policy automation should run inside GitHub Actions:
+
+```yaml
+steps:
+  - uses: actions/checkout@v4
+  - uses: Malnati/vaults-diagram-tools-action@v0
+    with:
+      mode: render
+      input: docs/diagrams
+      output-dir: diagram-assets
+```
+
+- [Marketplace listing](https://github.com/marketplace/actions/vaults-diagram-tools)
+- [Action repository](https://github.com/Malnati/vaults-diagram-tools-action)
+- Initial action release: `v0.1.4`; compatibility tag: `v0`.
 
 ### GitHub release assets
 
@@ -226,7 +245,7 @@ flowchart LR
 - Dracula-themed examples credit the MIT-licensed Dracula Theme palette through `beautiful-mermaid`.
 - Icon credits include Font Awesome 4, SVG Logos by Gil Barbara, and Lucide Icons via Iconify JSON packages.
 - Artifact policy: keep Mermaid source as `.mmd`, render `.svg` and `.jpg`, link all three artifacts from Markdown, and use fenced `mermaid` blocks for inline source.
-- Distribution proof points: npm `0.1.4`, MCP Registry `active` at version `0.1.4`, Smithery published, VS Code VSIX/Marketplace targets, GitHub Release/GHCR `v0.1.4`, Quay.io Podman image `v0.1.0`.
+- Distribution proof points: npm `0.1.4`, dedicated GitHub Actions action repo release `v0.1.4`/`v0` with Marketplace target, MCP Registry `active` at version `0.1.4`, Smithery published, VS Code VSIX/Marketplace targets, GitHub Release/GHCR `v0.1.4`, Quay.io Podman image `v0.1.0`.
 
 ## Brand assets
 
