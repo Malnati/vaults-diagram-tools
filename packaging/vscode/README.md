@@ -39,14 +39,14 @@ The extension contributes one MCP server definition provider: `vaultsDiagramTool
 
 ## Manual publication
 
-GitHub Actions validates and packages release artifacts only. Publish external registries from an authenticated local terminal:
+GitHub Actions validates and packages release artifacts only. Publish external registries from an authenticated local terminal through the root Makefile:
 
 ```bash
-npm publish --access public
-npm run vscode:package
-npm run vscode:publish:marketplace -- -p <token-local>
-npm run vscode:publish:openvsx -- -p <token-local>
+make auth
+make publish-all
 ```
+
+The Makefile publishes in sequence: GitHub Release assets, npm, VS Code Marketplace, Open VSX, GHCR, Quay.io, and MCP Registry. It is guard-only: it fails when the current version/tag/npm package already exists instead of bumping versions.
 
 ## Requirements
 

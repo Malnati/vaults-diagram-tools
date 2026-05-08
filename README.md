@@ -234,13 +234,14 @@ npm run vscode:package
 code --install-extension dist/vaults-diagram-tools-vscode-0.1.4.vsix
 ```
 
-Manual external publication:
+Sequential local publication:
 
 ```bash
-npm publish --access public
-npm run vscode:publish:marketplace -- -p <token-local>
-npm run vscode:publish:openvsx -- -p <token-local>
+make auth
+make publish-all
 ```
+
+`make publish-all` runs local-terminal authentication first, validates guard-only release metadata, packages artifacts, creates the GitHub tag/release, publishes npm, VS Code Marketplace, Open VSX, GHCR, Quay.io, and MCP Registry, then verifies public availability. It fails when the current version/tag/npm package already exists; bump and commit release metadata before running.
 
 ## Command line usage
 
