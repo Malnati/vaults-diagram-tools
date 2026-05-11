@@ -83,7 +83,7 @@
     "dejavu-fonts-ttf": "2.37.3",
     "jpeg-js": "0.4.4",
     "shiki": "3.23.0",
-    "zod": "^3.25.76"
+    "zod": "^4.4.3"
   },
   "author": "Malnati",
   "repository": {
